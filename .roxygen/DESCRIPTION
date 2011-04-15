@@ -1,0 +1,16 @@
+Package: mixed.zelig
+Version: 0.1
+Date: 2011-04-12
+Title: A Zelig Model
+Author: Matt Owen
+Maintainer: Matt Owen <mowen@iq.harvard.edu>
+Depends: Zelig, lme4
+Description: A Zelig Model
+License: GPL (>=2)
+URL: http://gking.harvard.edu/zelig
+Packaged: Tue Apr 12 12:30:18 2011
+Collate: 'param.gamma.mixed.R' 'param.logit.mixed.R' 'param.ls.mixed.R'
+    'param.poisson.mixed.R' 'param.probit.mixed.R' 'qi.gamma.mixed.R'
+    'qi.logit.mixed.R' 'qi.ls.mixed.R' 'qi.poisson.mixed.R'
+    'qi.probit.mixed.R' 'zelig2gamma.mixed.R' 'zelig2logit.mixed.R'
+    'zelig2ls.mixed.R' 'zelig2poisson.mixed.R' 'zelig2probit.mixed.R'
