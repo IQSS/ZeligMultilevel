@@ -48,9 +48,9 @@ qi.ls.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
 }
 
 #' Compute Mixed Logit Expected Values
-#' @description It seems this function is in need of heavy repair.
-#'              In particular, the exclusive presence of Inf and
-#'          numerically zero results 
+#' It seems this function is in need of heavy repair.
+#' In particular, the exclusive presence of Inf and
+#' numerically zero results 
 #' @param fixed fixed values
 #' @param random random values
 #' @param param the `parameters' object

@@ -1,9 +1,9 @@
 \name{.compute.poisson.ev.and.pv}
 \alias{.compute.poisson.ev.and.pv}
 \title{Compute Mixed Gamma Expected Values...}
-\usage{.compute.poisson.ev.and.pv(fixed, random, ..., param)}
-\description{Compute Mixed Gamma Expected Values}
-\description{It seems this function is in need of heavy repair.
+\usage{.compute.poisson.ev.and.pv(fixed, random, ..., param, data)}
+\description{Compute Mixed Gamma Expected Values
+It seems this function is in need of heavy repair.
 In particular, the exclusive presence of Inf and
 numerically zero results}
 \value{a list containing simulated expected values (ev),

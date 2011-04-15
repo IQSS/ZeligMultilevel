@@ -1,4 +1,5 @@
-#' Compute Quantities of Interest for the Zelig Model logit.mixed
+#' Compute Quantities of Interest for the Zelig Models logit.mixed and probit.mixed
+#' @aliases qi.probit.mixed
 #' @param obj a zelig object
 #' @param x a setx object
 #' @param x1 an optional setx object
@@ -47,10 +48,10 @@ qi.logit.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
        )
 }
 
-#' Compute Mixed Logit Expected Values
-#' @description It seems this function is in need of heavy repair.
-#'              In particular, the exclusive presence of Inf and
-#'          numerically zero results 
+#' Compute Mixed Logit and Probit Expected Values
+#' It seems this function is in need of heavy repair.
+#' In particular, the exclusive presence of Inf and
+#' numerically zero results 
 #' @param fixed fixed values
 #' @param random random values
 #' @param param the `parameters' object
@@ -62,6 +63,7 @@ qi.logit.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
   # 
   betas <- coef(param)
   gammas <- alpha(param)$gamma
+  inv <- linkinv(param)
 
   # number of simulations
   num <- nrow(betas)
@@ -78,15 +80,19 @@ qi.logit.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
   #  mu <- mu + left %*% right
   #}
 
-  theta <- matrix(eta, nrow = num)
+  theta <- matrix(inv(eta), nrow = num)
+  mut <- matrix(inv(mu), nrow = num)
 
   ev <- theta
   pr <- matrix(NA, num)
   pv.warnings <- c()
 
   for (k in 1:ncol(mut)) {
-    pr[, k] <- rnorm(length(mu[, 1]), mean=mu[, k], sd=alpha)
+    pr[, k] <- rbinom(num, 1, mut[, k])
+    pr[, k] <- as.character(pr[, k])
   }
+
+  dimnames(ev) <- dimnames(pr) <- dimnames(theta)
 
   # return qi's and predicted value warnings
   list(ev = ev, pv = pr, pv.warnings = pv.warnings)

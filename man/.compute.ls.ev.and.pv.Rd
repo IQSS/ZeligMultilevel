@@ -2,8 +2,8 @@
 \alias{.compute.ls.ev.and.pv}
 \title{Compute Mixed Logit Expected Values...}
 \usage{.compute.ls.ev.and.pv(fixed, random, ..., param)}
-\description{Compute Mixed Logit Expected Values}
-\description{It seems this function is in need of heavy repair.
+\description{Compute Mixed Logit Expected Values
+It seems this function is in need of heavy repair.
 In particular, the exclusive presence of Inf and
 numerically zero results}
 \value{a list containing simulated expected values (ev),

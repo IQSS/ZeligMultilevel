@@ -4,9 +4,4 @@
 #' @param num an integer specifying the number of simulations to compute
 #' @return a list specifying link, link-inverse, random samples, and ancillary parameters
 #' @export
-param.probit.mixed <- function(obj, num=1000) {
-  list(
-       coef = NULL,
-       linkinv = NULL
-       )
-}
+param.probit.mixed <- param.logit.mixed

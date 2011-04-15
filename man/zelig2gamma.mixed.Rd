@@ -5,6 +5,7 @@
 \description{Interface between the Zelig Model gamma.mixed and 
 the Pre-existing Model-fitting Method}
 \value{a list specifying '.function'}
+\author{Matt Owen and Ferdinand Alimadhi and Delia}
 \arguments{\item{formula}{a formula}
 \item{...}{}
 \item{data}{a data.frame}}

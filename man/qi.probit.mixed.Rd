@@ -1,8 +1,7 @@
 \name{qi.probit.mixed}
 \alias{qi.probit.mixed}
-\title{Compute Quantities of Interest for the Zelig Model probit...}
-\usage{qi.probit.mixed(obj, x, x1, y, num=1000, param)}
-\description{Compute Quantities of Interest for the Zelig Model probit.mixed}
+\title{Compute Quantities of Interest for the Zelig Model logit...}
+\description{Compute Quantities of Interest for the Zelig Model logit.mixed}
 \value{a list of key-value pairs specifying pairing titles of quantities of interest
 with their simulations}
 \arguments{\item{obj}{a zelig object}

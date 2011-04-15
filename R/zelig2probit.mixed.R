@@ -6,9 +6,14 @@
 #' @return a list specifying '.function'
 #' @export
 zelig2probit.mixed <- function (formula, ..., data) {
+
+  formula <- tolmerFormat(reduceMI(formula))
+
   list(
-       .function = "",
-       formula = formula,
-       data = data
+       .function = "lmer",
+       formula = literal(formula),
+       family = binomial(link='probit'),
+       data = data,
+       ...
        )
 }
