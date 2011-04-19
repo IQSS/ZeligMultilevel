@@ -1,3 +1,5 @@
+# ls.mixed unit test
+
 library(mixed.zelig)
 
 data(voteincome)
@@ -8,17 +10,13 @@ z.out <- zelig(
                model="ls.mixed"
                )
 
-summary(z.out)
-
-##  Setting the explanatory variables at their default values
-##  (mode for factor variables and mean for non-factor variables),
-##  with education set to 80th and 20th percentiles.
 x.low <- setx(z.out, education=quantile(voteincome$education, 0.8))
 x.high <- setx(z.out, education=quantile(voteincome$education, 0.2))
 
-##  Simulating draws using the default bootstrap method.
 s.out <- sim(z.out, x = x.low, x1 = x.high)
 
-##  Viewing the simulated quantities of interest, for every
-##  observation:
-summary(s.out)
+summary(z.out)
+vcov(z.out)
+coef(z.out)
+x.low
+x.high

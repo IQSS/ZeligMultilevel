@@ -1,3 +1,4 @@
+# gamma.mixed unit test
 library(mixed.zelig)
 
 data(coalition2)
@@ -9,12 +10,7 @@ z.out <- zelig(
                family = Gamma(link="log")
                )
 
-summary(z.out)
 
-##  Setting the explanatory variables at their default values
-##  (mode for factor variables and mean for non-factor variables),
-##  comparing the ruling coalition in the minority to the ruling
-##  coalition in the majority.
 x.high <- setx(z.out, numst2 = 1)
 x.low <- setx(z.out, numst2 = 0)
 
@@ -22,6 +18,9 @@ x.low <- setx(z.out, numst2 = 0)
 
 s.out <- sim(z.out, x = x.low, x1=x.high)
 
-##  Viewing the simulated quantities of interest, for every
-##  observation
-summary(s.out)
+#
+summary(z.out)
+vcov(z.out)
+coef(z.out)
+x.high
+x.low
