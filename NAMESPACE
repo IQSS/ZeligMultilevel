@@ -1,3 +1,8 @@
+export(describe.gamma.mixed)
+export(describe.logit.mixed)
+export(describe.ls.mixed)
+export(describe.poisson.mixed)
+export(describe.probit.mixed)
 export(model.frame.lmer)
 export(param.gamma.mixed)
 export(param.logit.mixed)

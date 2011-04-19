@@ -92,6 +92,8 @@ qi.logit.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
     pr[, k] <- as.character(pr[, k])
   }
 
+  levels(pr) <- c("0", "1")
+
   dimnames(ev) <- dimnames(pr) <- dimnames(theta)
 
   # return qi's and predicted value warnings
