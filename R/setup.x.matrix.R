@@ -1,4 +1,9 @@
 #' Setup Matrix
+#' @note This function is used internally by \code{mixed.zelig}
+#' @param form a \code{formula} whose "fixed" terms are used to generate
+#'   a matrix for simulating quantities of itnerest
+#' @param x a \code{setx} object
+#' @return a \code{matrix}
 #' @author Matt Owen \email{mowen@@iq.harvard.edu}
 setup.x.matrix <- function(form, x) {
 

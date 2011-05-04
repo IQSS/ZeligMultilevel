@@ -1,7 +1,7 @@
 #' Interface between the Zelig Model probit.mixed and 
 #' the Pre-existing Model-fitting Method
 #' @param formula a formula
-#' @param ... 
+#' @param ... parameter to be passed to the \code{lmer} function
 #' @param data a data.frame 
 #' @return a list specifying '.function'
 #' @export

@@ -6,5 +6,5 @@
 the Pre-existing Model-fitting Method}
 \value{a list specifying '.function'}
 \arguments{\item{formula}{a formula}
-\item{...}{}
+\item{...}{parameter to be passed to the \code{lmer} function}
 \item{data}{a data.frame}}

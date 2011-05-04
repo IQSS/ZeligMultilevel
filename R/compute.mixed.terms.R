@@ -1,4 +1,11 @@
 #' Compute Random and Fixed Terms
+#' @note This function is used internally by \code{mixed.zelig}
+#' @param form a \code{formula} whose parameters will be categorized as "fixed"
+#'   or "random"
+#' @param x a \code{setx} object
+#' @param data a \code{data.frame}
+#' @return a \code{list} containing the entries "f.terms" specifying fixed
+#'   terms and "r.terms" specifying random terms
 #' @author Matt Owen \email{mowen@@iq.harvard.edu}
 compute.mixed.terms <- function (form, x, data) {
   if (is.null(x))

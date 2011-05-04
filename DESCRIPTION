@@ -9,10 +9,10 @@ Description: A Zelig Model
 License: GPL (>=2)
 URL: http://gking.harvard.edu/zelig
 Packaged: Tue Apr 12 12:30:18 2011
-Collate: 'compute.mixed.terms.R' 'describes.R' 'model.frame.lmer.R'
-    'param.gamma.mixed.R' 'param.logit.mixed.R' 'param.ls.mixed.R'
-    'param.poisson.mixed.R' 'param.probit.mixed.R' 'qi.gamma.mixed.R'
-    'qi.logit.mixed.R' 'qi.ls.mixed.R' 'qi.poisson.mixed.R'
-    'qi.probit.mixed.R' 'setup.x.matrix.R' 'zelig2gamma.mixed.R'
-    'zelig2logit.mixed.R' 'zelig2ls.mixed.R' 'zelig2poisson.mixed.R'
-    'zelig2probit.mixed.R'
+Collate: 'compute.mixed.terms.R' 'describes.R' 'mixed.zelig-package.R'
+    'model.frame.lmer.R' 'param.gamma.mixed.R' 'param.logit.mixed.R'
+    'param.ls.mixed.R' 'param.poisson.mixed.R' 'param.probit.mixed.R'
+    'qi.gamma.mixed.R' 'qi.logit.mixed.R' 'qi.ls.mixed.R'
+    'qi.poisson.mixed.R' 'qi.probit.mixed.R' 'setup.x.matrix.R'
+    'zelig2gamma.mixed.R' 'zelig2logit.mixed.R' 'zelig2ls.mixed.R'
+    'zelig2poisson.mixed.R' 'zelig2probit.mixed.R'

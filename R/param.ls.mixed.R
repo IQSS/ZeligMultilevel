@@ -2,10 +2,11 @@
 #' Function (this is primarily a helper function for the logit.mixed model)
 #' @param obj a zelig object
 #' @param num an integer specifying the number of simulations to compute
+#' @param ... ignored parameters
 #' @return a list specifying link, link-inverse, random samples, and ancillary parameters
 #' @export
 #' @author Matt Owen and Ferdinand Alimadhi and Delia
-param.ls.mixed <- function(obj, num=1000) {
+param.ls.mixed <- function(obj, num=1000, ...) {
   zelig <- obj
   # 
   obj <- GetObject(obj)
