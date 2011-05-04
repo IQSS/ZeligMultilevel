@@ -2,7 +2,7 @@
 #'
 #' \tabular{ll}{
 #' Package: \tab mixed.zelig\cr
-#' Version: \tab 1.0-1\cr
+#' Version: \tab .1-1\cr
 #' Date: \tab 2011-04-29\cr
 #' Depends: \tab Zelig, lme4\cr
 #' License: \tab GPL version 2 or newer\cr
