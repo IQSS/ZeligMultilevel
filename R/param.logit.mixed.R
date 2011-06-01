@@ -1,10 +1,10 @@
 #' Extract Samples from a Distribution in Order to Pass Them to the `qi'
 #' Function (this is primarily a helper function for the logit.mixed model)
+#' @S3method param logit.mixed
 #' @param obj a zelig object
 #' @param num an integer specifying the number of simulations to compute
 #' @param ... ignored parameters
 #' @return a list specifying link, link-inverse, random samples, and ancillary parameters
-#' @export
 #' @author Matt Owen and Ferdinand Alimadhi and Delia
 param.logit.mixed <- function(obj, num=1000, ...) {
   zelig <- obj

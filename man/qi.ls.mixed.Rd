@@ -1,8 +1,8 @@
 \name{qi.ls.mixed}
 \alias{qi.ls.mixed}
-\title{Compute Quantities of Interest for the Zelig Model logit...}
-\usage{qi.ls.mixed(obj, x, x1, y, num=1000, param)}
-\description{Compute Quantities of Interest for the Zelig Model logit.mixed}
+\title{Compute Quantities of Interest for the Zelig Model ls...}
+\usage{\method{qi}{ls.mixed}(obj, x, x1=NULL, y=NULL, num=1000, param=NULL)}
+\description{Compute Quantities of Interest for the Zelig Model \code{ls.mixed}}
 \value{a list of key-value pairs specifying pairing titles of quantities of interest
 with their simulations}
 \arguments{\item{obj}{a zelig object}

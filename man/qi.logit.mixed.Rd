@@ -1,7 +1,7 @@
 \name{qi.logit.mixed}
 \alias{qi.logit.mixed}
 \title{Compute Quantities of Interest for the Zelig Models logit...}
-\usage{qi.logit.mixed(obj, x, x1, y, num=1000, param)}
+\usage{\method{qi}{logit.mixed}(obj, x, x1=NULL, y=NULL, num=1000, param=NULL)}
 \description{Compute Quantities of Interest for the Zelig Models logit.mixed and probit.mixed}
 \value{a list of key-value pairs specifying pairing titles of quantities of interest
 with their simulations}

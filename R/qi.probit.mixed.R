@@ -1,4 +1,6 @@
-#' Compute Quantities of Interest for the Zelig Model logit.mixed
+#' Compute Quantities of Interest for the Zelig Model \code{probit.mixed}
+#' @usage \method{qi}{probit.mixed}(obj, x, x1=NULL, y=NULL, num=1000, param=NULL)
+#' @S3method qi probit.mixed
 #' @param obj a zelig object
 #' @param x a setx object
 #' @param x1 an optional setx object

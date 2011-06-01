@@ -1,7 +1,7 @@
 \name{qi.gamma.mixed}
 \alias{qi.gamma.mixed}
 \title{Compute Quantities of Interest for the Zelig Model gamma...}
-\usage{qi.gamma.mixed(obj, x, x1, y, num=1000, param)}
+\usage{\method{qi}{gamma.mixed}(obj, x, x1=NULL, y=NULL, num=1000, param=NULL)}
 \description{Compute Quantities of Interest for the Zelig Model gamma.mixed}
 \value{a list of key-value pairs specifying pairing titles of quantities of interest
 with their simulations}

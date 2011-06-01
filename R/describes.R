@@ -1,5 +1,5 @@
 #' Describe the `gamma.mixed' model to Zelig
-#'
+#' @S3method describe gamma.mixed
 #' @param ... ignored parameters
 #' @return a list of important information
 #' @export
@@ -13,7 +13,7 @@ describe.gamma.mixed <- function(...) {
 }
 
 #' Describe the `logit.mixed' model to Zelig
-#'
+#' @S3method describe logit.mixed
 #' @param ... ignored parameters
 #' @return a list of important information
 #' @export
@@ -27,7 +27,7 @@ describe.logit.mixed <- function(...) {
 }
 
 #' Describe the `ls.mixed' model to Zelig
-#'
+#' @S3method describe ls.mixed
 #' @param ... ignored parameters
 #' @return a list of important information
 #' @export
@@ -41,7 +41,7 @@ describe.ls.mixed <- function(...) {
 }
 
 #' Describe the `poisson.mixed' model to Zelig
-#'
+#' @S3method describe poisson.mixed
 #' @param ... ignored parameters
 #' @return a list of important information
 #' @export
@@ -55,7 +55,7 @@ describe.poisson.mixed <- function(...) {
 }
 
 #' Describe the `probit' model to Zelig
-#'
+#' @S3method describe probit.mixed
 #' @param ... ignored parameters
 #' @return a list of important information
 #' @export
