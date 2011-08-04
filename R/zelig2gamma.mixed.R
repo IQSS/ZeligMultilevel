@@ -15,7 +15,7 @@ zelig2gamma.mixed <- function (formula, family=Gamma(link='identity'), ..., data
 
   list(
        .function = "lmer",
-       formula = literal(formula),
+       formula = formula,
        family  = family,
        data = data,
        ...

@@ -16,7 +16,7 @@ zelig2ls.mixed <- function (formula, family, ..., data) {
 
   list(
        .function = "lmer",
-       formula = literal(formula),
+       formula = (formula),
        family = NULL,
        data = data,
        ...

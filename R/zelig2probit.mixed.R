@@ -11,7 +11,7 @@ zelig2probit.mixed <- function (formula, ..., data) {
 
   list(
        .function = "lmer",
-       formula = literal(formula),
+       formula = (formula),
        family = binomial(link='probit'),
        data = data,
        ...

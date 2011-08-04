@@ -36,6 +36,6 @@ param.poisson.mixed <- function(obj, num=1000, ...) {
   list(
        coef = betas,
        alpha = list(scale = scale, gammas = gammas),
-       fam = eval(zelig$zc$parameters$family, zelig$parent)
+       fam = zelig$zc$family
        )
 }

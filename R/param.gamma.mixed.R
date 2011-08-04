@@ -6,6 +6,7 @@
 #' @param ... ignored parameters
 #' @return a list specifying link, link-inverse, random samples, and ancillary 
 #'         parameters
+#' @export
 param.gamma.mixed <- function(obj, num=1000, ...) {
   zelig <- obj
   # 
@@ -31,10 +32,11 @@ param.gamma.mixed <- function(obj, num=1000, ...) {
   names(gammas) <- names(vars)
   betas <- mvrnorm(num, fixef(obj), vcov(obj))
   scale <- sigma(obj)
+  zelig$zc$family
 
   list(
        coef = betas,
        alpha = list(scale = scale, gammas = gammas),
-       fam = eval(zelig$zc$parameters$family, zelig$parent)
+       fam = zelig$zc$family
        )
 }
