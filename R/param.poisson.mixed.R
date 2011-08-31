@@ -1,6 +1,7 @@
 #' Extract Samples from a Distribution in Order to Pass Them to the `qi'
 #' Function (this is primarily a helper function for the logit.mixed model)
 #' @S3method param poisson.mixed
+#' @usage \method{param}{poisson.mixed}(obj, num=1000, ...)
 #' @param obj a zelig object
 #' @param num an integer specifying the number of simulations to compute
 #' @param ... ignored parameters
@@ -36,6 +37,6 @@ param.poisson.mixed <- function(obj, num=1000, ...) {
   list(
        coef = betas,
        alpha = list(scale = scale, gammas = gammas),
-       fam = zelig$zc$family
+       fam = eval(zelig$call$family, zelig$env)
        )
 }

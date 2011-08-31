@@ -1,6 +1,7 @@
 #' Extract Samples from a Distribution in Order to Pass Them to the `qi' Function
 #' (this is primarily a helper function for the gamma.mixed model)
 #' @S3method param gamma.mixed
+#' @usage \method{param}{gamma.mixed}(obj, num=1000, ...)
 #' @param obj a zelig object
 #' @param num an integer specifying the number of simulations to compute
 #' @param ... ignored parameters
@@ -32,11 +33,10 @@ param.gamma.mixed <- function(obj, num=1000, ...) {
   names(gammas) <- names(vars)
   betas <- mvrnorm(num, fixef(obj), vcov(obj))
   scale <- sigma(obj)
-  zelig$zc$family
 
   list(
        coef = betas,
        alpha = list(scale = scale, gammas = gammas),
-       fam = zelig$zc$family
+       fam = eval(zelig$call$family, zelig$env)
        )
 }

@@ -14,7 +14,7 @@ qi.gamma.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
 
   # extract parameters from `zelig' object
   data <- obj$data
-  form <- obj$formula
+  form <- get("formula", attr(obj, "state"))
 
   # extract simulated parameters from `param' object
   betas <- coef(param)

@@ -3,9 +3,9 @@
 \description{Multi-level (Mixed, Hierarchical, etc.)  Zelig Models}
 \details{\tabular{ll}{
 Package: \tab mixed.zelig\cr
-Version: \tab .1-1\cr
+Version: \tab 0.2\cr
 Date: \tab 2011-04-29\cr
-Depends: \tab Zelig, lme4\cr
+Depends: \tab Zelig (>= 4.0-5), lme4\cr
 License: \tab GPL version 2 or newer\cr
 URL: \tab http://gking.harvard.edu/zelig\cr
 }
