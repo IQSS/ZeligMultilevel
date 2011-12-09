@@ -12,8 +12,6 @@
 #' @author Matt Owen and Gregor Gorjanc and Ferdinand Alimadhi and Delia
 qi.poisson.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
 
-  as.matrix(x$updated[, x$explan])
-
   # extract parameters from `zelig' object
   data <- obj$data
   form <- get("formula", attr(obj, "state"))
