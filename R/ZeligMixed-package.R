@@ -1,9 +1,9 @@
 #' Multi-level (Mixed, Hierarchical, etc.)  Zelig Models
 #'
 #' \tabular{ll}{
-#' Package: \tab mixed.zelig\cr
-#' Version: \tab .1-2\cr
-#' Date: \tab 2011-04-29\cr
+#' Package: \tab ZeligMixed\cr
+#' Version: \tab .3\cr
+#' Date: \tab 2011-12-12\cr
 #' Depends: \tab Zelig, lme4\cr
 #' License: \tab GPL version 2 or newer\cr
 #' URL: \tab http://gking.harvard.edu/zelig\cr
@@ -18,8 +18,8 @@
 #' probit.mixed: \tab Multi-level Probit Regression \cr
 #' }
 #' 
-#' @name mixed.zelig-package
-#' @aliases mixed.zelig
+#' @name ZeligMixed-package
+#' @aliases ZeligMixed
 #' @docType package
 #' @author Matt Owen \email{mowen@@iq.harvard.edu}, Kosuke Imai, Olivia Lau,
 #'   and Gary King 

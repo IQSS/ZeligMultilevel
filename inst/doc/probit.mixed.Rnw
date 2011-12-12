@@ -31,7 +31,7 @@
 @
 
 <<loadLibrary, echo=F,results=hide>>=
-library(mixed.zelig)
+library(ZeligMixed)
 @
 
 \section{{\tt probit.mixed}: Mixed effects probit Regression}
@@ -196,7 +196,7 @@ The output of each Zelig command contains useful information which you may view.
 Mixed effects probit regression is part of {\tt lme4} package by Douglas M. Bates \citep{Bates07}.
 
 \bibliographystyle{plain}
-\bibliography{mixed.zelig}
+\bibliography{ZeligMixed}
 <<afterpkgs, echo=FALSE>>=
  after <- search()
  torm <- setdiff(after,before)

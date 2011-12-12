@@ -1,5 +1,5 @@
 # gamma.mixed unit test
-library(mixed.zelig)
+library(ZeligMixed)
 
 data(coalition2)
 
@@ -17,6 +17,8 @@ x.low <- setx(z.out, numst2 = 0)
 ##  Simulating draws using the default bootstrap method.
 
 s.out <- sim(z.out, x = x.low, x1=x.high)
+
+summary(s.out)
 
 #
 summary(z.out)

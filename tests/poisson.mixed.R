@@ -1,6 +1,6 @@
 # poisson.mixed unit test
 
-library(mixed.zelig)
+library(ZeligMixed)
 
 data(homerun)
 
