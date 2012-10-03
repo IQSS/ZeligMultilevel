@@ -7,7 +7,6 @@
 #' @param ... ignored parameters
 #' @return a list specifying link, link-inverse, random samples, and ancillary 
 #'         parameters
-#' @export
 param.gamma.mixed <- function(obj, num=1000, ...) {
   zelig <- obj
   # 

@@ -9,5 +9,4 @@
 #' @param param a parameters object
 #' @return a list of key-value pairs specifying pairing titles of quantities of interest
 #'         with their simulations
-#' @export
 qi.probit.mixed <- qi.logit.mixed

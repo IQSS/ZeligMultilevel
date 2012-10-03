@@ -1,3 +1,7 @@
 ^.git.*$
 ^man/\..*$
 ^man/\[.*$
+^man/qi\..*
+^man/param\..*
+^man/describe\..*
+^man/\..*
