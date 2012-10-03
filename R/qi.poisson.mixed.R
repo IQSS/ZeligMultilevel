@@ -10,6 +10,7 @@
 #' @return a list of key-value pairs specifying pairing titles of quantities of interest
 #'         with their simulations
 #' @author Matt Owen and Gregor Gorjanc and Ferdinand Alimadhi and Delia
+#' @export
 qi.poisson.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
 
   # extract parameters from `zelig' object
@@ -21,12 +22,12 @@ qi.poisson.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL)
   gammas <- alpha(param)$gamma
   alpha <- alpha(param)$scale
 
-  x1.matrix <- setup.x.matrix(form, x)
-  x2.matrix <- setup.x.matrix(form, x1)
+  x1.matrix <- ZeligMixed:::setup.x.matrix(form, x)
+  x2.matrix <- ZeligMixed:::setup.x.matrix(form, x1)
 
   # compute terms
-  mixed.terms1 <- compute.mixed.terms(form, x1.matrix, data)
-  mixed.terms2 <- compute.mixed.terms(form, x2.matrix, data)
+  mixed.terms1 <- ZeligMixed:::compute.mixed.terms(form, x1.matrix, data)
+  mixed.terms2 <- ZeligMixed:::compute.mixed.terms(form, x2.matrix, data)
 
   # extract relevant terms
   # this is purely for code clarity
@@ -37,8 +38,8 @@ qi.poisson.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL)
   random2 <- mixed.terms2$r.terms
 
   #
-  qi1 <- .compute.poisson.ev.and.pv(fixed1, random1, param=param, data)
-  qi2 <- .compute.poisson.ev.and.pv(fixed2, random2, param=param, data)
+  qi1 <- ZeligMixed:::.compute.poisson.ev.and.pv(fixed1, random1, param=param, data)
+  qi2 <- ZeligMixed:::.compute.poisson.ev.and.pv(fixed2, random2, param=param, data)
 
   list(
        "Expected Values: E(Y|X)" = qi1$ev,
@@ -106,7 +107,3 @@ qi.poisson.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL)
   # return qi's and predicted value warnings
   list(ev = ev, pv = pr, pv.warnings = pv.warnings)
 }
-
-#' 
-#'
-

@@ -20,7 +20,5 @@ setup.x.matrix <- function(form, x) {
 
   x.matrix <- model.matrix(parsed.formula$fixed, data=x$updated[untagged.vars])
 
-  #x.matrix <- as.matrix(x.matrix)
-
   x.matrix
 }

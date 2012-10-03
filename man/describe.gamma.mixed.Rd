@@ -1,8 +1,19 @@
 \name{describe.gamma.mixed}
 \alias{describe.gamma.mixed}
-\title{Describe the `gamma...}
-\usage{describe.gamma.mixed(...)}
-\description{Describe the `gamma.mixed' model to Zelig}
-\value{a list of important information}
-\author{Matt Owen \email{mowen@iq.harvard.edu}}
-\arguments{\item{...}{ignored parameters}}
+\title{Describe a ``gamma.mixed'' model to Zelig}
+\usage{
+  \method{describe}{gamma.mixed}(...)
+}
+\arguments{
+  \item{...}{ignored parameters}
+}
+\value{
+  a list to be processed by `as.description'
+}
+\description{
+  Describe a ``gamma.mixed'' model to Zelig
+}
+\author{
+  Matt Owen \email{mowen@iq.harvard.edu}
+}
+

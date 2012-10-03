@@ -30,8 +30,8 @@ param.logit.mixed <- function(obj, num=1000, ...) {
   }
 
   names(gammas) <- names(vars)
-  betas <- mvrnorm(num, fixef(obj), vcov(obj))
-  scale <- sigma(obj)
+  betas <- mvrnorm(num, fixef(.fitted), vcov(.fitted))
+  scale <- sigma(.fitted)
 
   list(
        coef = betas,

@@ -1,4 +1,4 @@
-#' Compute Quantities of Interest for the Zelig Models logit.mixed and probit.mixed
+#' Compute Quantities of Interest for the logit.mixed and probit.mixed
 #' @usage \method{qi}{logit.mixed}(obj, x, x1=NULL, y=NULL, num=1000, param=NULL)
 #' @S3method qi logit.mixed
 #' @param obj a zelig object
@@ -7,8 +7,9 @@
 #' @param y ignored until later versions
 #' @param num an integer specifying the number of simulations to compute
 #' @param param a parameters object
-#' @return a list of key-value pairs specifying pairing titles of quantities of interest
-#'         with their simulations
+#' @return a list of key-value pairs specifying pairing titles of quantities of
+#' interest with their simulations
+#' @export
 qi.logit.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
 
   # extract parameters from `zelig' object
@@ -19,12 +20,12 @@ qi.logit.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
   betas <- coef(param)
   gammas <- alpha(param)$gamma
 
-  x1.matrix <- setup.x.matrix(form, x)
-  x2.matrix <- setup.x.matrix(form, x1)
+  x1.matrix <- ZeligMixed:::setup.x.matrix(form, x)
+  x2.matrix <- ZeligMixed:::setup.x.matrix(form, x1)
 
   # compute terms
-  mixed.terms1 <- compute.mixed.terms(form, x1.matrix, data)
-  mixed.terms2 <- compute.mixed.terms(form, x2.matrix, data)
+  mixed.terms1 <- ZeligMixed:::compute.mixed.terms(form, x1.matrix, data)
+  mixed.terms2 <- ZeligMixed:::compute.mixed.terms(form, x2.matrix, data)
 
   # extract relevant terms
   # this is purely for code clarity
@@ -35,8 +36,8 @@ qi.logit.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
   random2 <- mixed.terms2$r.terms
 
   #
-  qi1 <- .compute.logit.ev.and.pv(fixed1, random1, param=param)
-  qi2 <- .compute.logit.ev.and.pv(fixed2, random2, param=param)
+  qi1 <- ZeligMixed:::.compute.logit.ev.and.pv(fixed1, random1, param=param)
+  qi2 <- ZeligMixed:::.compute.logit.ev.and.pv(fixed2, random2, param=param)
 
   list(
        "Expected Values: E(Y|X)" = qi1$ev,

@@ -19,10 +19,3 @@ x.low <- setx(z.out, numst2 = 0)
 s.out <- sim(z.out, x = x.low, x1=x.high)
 
 summary(s.out)
-
-#
-summary(z.out)
-vcov(z.out)
-coef(z.out)
-x.high
-x.low

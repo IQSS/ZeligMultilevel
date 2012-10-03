@@ -25,6 +25,3 @@ s.out <- sim(z.out, x = x.low, x1 = x.high)
 #
 summary(z.out)
 vcov(z.out)
-coef(z.out)
-x.low
-x.high

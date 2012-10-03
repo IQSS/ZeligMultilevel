@@ -1,8 +1,19 @@
 \name{describe.poisson.mixed}
 \alias{describe.poisson.mixed}
-\title{Describe the `poisson...}
-\usage{describe.poisson.mixed(...)}
-\description{Describe the `poisson.mixed' model to Zelig}
-\value{a list of important information}
-\author{Matt Owen \email{mowen@iq.harvard.edu}}
-\arguments{\item{...}{ignored parameters}}
+\title{Describe a ``poisson.mixed'' model to Zelig}
+\usage{
+  \method{describe}{poisson.mixed}(...)
+}
+\arguments{
+  \item{...}{ignored parameters}
+}
+\value{
+  a list to be processed by `as.description'
+}
+\description{
+  Describe a ``poisson.mixed'' model to Zelig
+}
+\author{
+  Matt Owen \email{mowen@iq.harvard.edu}
+}
+
