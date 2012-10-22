@@ -1,12 +1,4 @@
-#' Extract Samples from a Distribution in Order to Pass Them to the `qi' Function
-#' (this is primarily a helper function for the gamma.mixed model)
 #' @S3method param gamma.mixed
-#' @usage \method{param}{gamma.mixed}(obj, num=1000, ...)
-#' @param obj a zelig object
-#' @param num an integer specifying the number of simulations to compute
-#' @param ... ignored parameters
-#' @return a list specifying link, link-inverse, random samples, and ancillary 
-#'         parameters
 param.gamma.mixed <- function(obj, num=1000, ...) {
   zelig <- obj
   # 

@@ -1,15 +1,4 @@
-#' Compute Quantities of Interest for the Zelig Model gamma.mixed
-#' @usage \method{qi}{gamma.mixed}(obj, x, x1=NULL, y=NULL, num=1000, param=NULL)
 #' @S3method qi gamma.mixed
-#' @param obj a zelig object
-#' @param x a setx object
-#' @param x1 an optional setx object
-#' @param y ...
-#' @param num an integer specifying the number of simulations to compute
-#' @param param a parameters object
-#' @return a list of key-value pairs specifying pairing titles of quantities of interest
-#'         with their simulations
-#' @author Matt Owen and Gregor Gorjanc and Ferdinand Alimadhi and Delia
 qi.gamma.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
 
   # extract parameters from `zelig' object

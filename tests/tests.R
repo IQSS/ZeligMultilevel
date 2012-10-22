@@ -19,7 +19,6 @@ x.low <- setx(z.out, numst2 = 0)
 
 s.out <- sim(z.out, x = x.low, x1=x.high, num = 10)
 
-
 # LOGIT
 
 
