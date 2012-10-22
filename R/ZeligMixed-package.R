@@ -1,15 +1,15 @@
-#' Multi-level Zelig Models
+#' Multilevel Regressions for Zelig
 #'
 #' \tabular{ll}{
 #' Package: \tab ZeligMultilevel\cr
-#' Version: \tab 0.7\cr
-#' Date: \tab 2011-12-12\cr
+#' Version: \tab 0.7-0\cr
+#' Date: \tab 2012-10-22\cr
 #' Depends: \tab Zelig (>= 4.0-11), lme4\cr
 #' License: \tab GPL version 2 or newer\cr
-#' URL: \tab http://gking.harvard.edu/zelig\cr
+#' URL: \tab http://projects.iq.harvard.edu/zelig\cr
 #' }
 #'
-#' Add-on pack for Zelig, containing multi-level models:
+#' Add-on pack for Zelig, containing the models:
 #' \tabular{ll}{
 #' gamma.mixed: \tab Multi-level Gamma Regression \cr
 #' logit.mixed: \tab Multi-level Logit Regression \cr
