@@ -27,7 +27,7 @@ qi.ls.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
   #
   qi1 <- ZeligMultilevel:::.compute.ls.ev.and.pv(fixed1, random1, param=param)
   if(!is.null(fixed2)){
-    qi2 <- ZeligMultilevel:::.compute.ls.ev.and.pv(fixed2, random2, param=param)
+    qi2 <- ZeligMultilevel:::.compute.ls.ev.and.pv(fixed2, random2, param=param)
     } else {
   	  qi2<-qi1
   	  qi2$ev<-NA
@@ -42,7 +42,7 @@ qi.ls.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
        "Expected Values: E(Y|X1)" = qi2$ev,
        "Predicted Values: Y|X1" = qi2$pv,
        "Risk Ratios: E(Y|X1) / E(Y|X)" = qi2$ev / qi1$ev,
-       "First DIfferences: E(Y|X1) - E(Y|X)" = qi2$ev - qi1$ev
+       "First Differences: E(Y|X1) - E(Y|X)" = qi2$ev - qi1$ev
        )
 }
 
