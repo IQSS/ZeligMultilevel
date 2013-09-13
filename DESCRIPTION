@@ -6,7 +6,7 @@ Author: Matthew Owen, Ferdinand Alimadhi, Delia Bailey
 Description: Add-on package for Zelig. Enables the use of multilevel (mixed-effect) models.
 Version: 0.7-1
 URL: http://projects.iq.harvard.edu/zelig
-Date: 2012-10-22
+Date: 2013-09-12
 Depends:
     Zelig (>= 4.0-11),
     lme4
