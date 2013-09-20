@@ -8,7 +8,7 @@
 #' @param data a data.frame 
 #' @return a list specifying '.function'
 #' @export
-zelig2ls.mixed <- function (formula, family, ..., data) {
+zelig2ls.mixed <- function (formula, ..., data) {
   if (!missing(family))
     warning("family parameter is ignored for the `ls.mixed' model")
 
@@ -16,8 +16,7 @@ zelig2ls.mixed <- function (formula, family, ..., data) {
 
   list(
        .function = "lmer",
-       formula = (formula),
-       family = NULL,
+       formula = (formula)
        data = data,
        ...
        )

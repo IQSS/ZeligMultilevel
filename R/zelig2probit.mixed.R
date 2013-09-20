@@ -10,7 +10,7 @@ zelig2probit.mixed <- function (formula, ..., data) {
   formula <- tolmerFormat(reduceMI(formula))
 
   list(
-       .function = "lmer",
+       .function = "glmer",
        formula = (formula),
        family = binomial(link='probit'),
        data = data,

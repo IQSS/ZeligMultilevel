@@ -13,7 +13,7 @@ zelig2poisson.mixed <- function (formula, family=gaussian, ..., data) {
   formula <- tolmerFormat(reduceMI(formula))
 
   list(
-       .function = "lmer",
+       .function = "glmer",
        formula = (formula),
        family  = family,
        data = data,

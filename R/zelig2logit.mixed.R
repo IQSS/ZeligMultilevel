@@ -14,7 +14,7 @@ zelig2logit.mixed <- function (formula, family=binomial(link='logit'), ..., data
   formula <- tolmerFormat(reduceMI(formula))
 
   list(
-       .function = "lmer",
+       .function = "glmer",
        formula = (formula),
        family = family,
        data = data,

@@ -14,7 +14,7 @@ zelig2gamma.mixed <- function (formula, family=Gamma(link='identity'), ..., data
   formula <- tolmerFormat(reduceMI(formula))
 
   list(
-       .function = "lmer",
+       .function = "glmer",
        formula = formula,
        family  = family,
        data = data,
