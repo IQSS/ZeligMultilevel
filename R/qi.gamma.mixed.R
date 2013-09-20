@@ -10,12 +10,18 @@ qi.gamma.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
   gammas <- alpha(param)$gamma
   alpha <- alpha(param)$scale
 
-  x1.matrix <- ZeligMultilevel:::setup.x.matrix(form, x)
-  x2.matrix <- ZeligMultilevel:::setup.x.matrix(form, x1)
+  #x1.matrix <- ZeligMultilevel:::setup.x.matrix(form, x)
+  #x2.matrix <- ZeligMultilevel:::setup.x.matrix(form, x1)
+  # New CRAN requirements:
+  x1.matrix <- setup.x.matrix(form, x)
+  x2.matrix <- setup.x.matrix(form, x1)
 
   # compute terms
-  mixed.terms1 <- ZeligMultilevel:::compute.mixed.terms(form, x1.matrix, data)
-  mixed.terms2 <- ZeligMultilevel:::compute.mixed.terms(form, x2.matrix, data)
+  #mixed.terms1 <- ZeligMultilevel:::compute.mixed.terms(form, x1.matrix, data)
+  #mixed.terms2 <- ZeligMultilevel:::compute.mixed.terms(form, x2.matrix, data)
+  # New CRAN requirements:
+  mixed.terms1 <- compute.mixed.terms(form, x1.matrix, data)
+  mixed.terms2 <- compute.mixed.terms(form, x2.matrix, data)
 
   # extract relevant terms
   # this is purely for code clarity
@@ -26,9 +32,11 @@ qi.gamma.mixed <- function(obj, x=NULL, x1=NULL, y=NULL, num=1000, param=NULL) {
   random2 <- mixed.terms2$r.terms
 
   #
-  qi1 <- ZeligMultilevel:::.compute.gamma.ev.and.pv(fixed1, random1, param=param)
+  #qi1 <- ZeligMultilevel:::.compute.gamma.ev.and.pv(fixed1, random1, param=param)
+  qi1 <- .compute.gamma.ev.and.pv(fixed1, random1, param=param)
   if(!is.null(fixed2)){
-    qi2 <- ZeligMultilevel:::.compute.gamma.ev.and.pv(fixed2, random2, param=param)
+    #qi2 <- ZeligMultilevel:::.compute.gamma.ev.and.pv(fixed2, random2, param=param)
+    qi2 <- .compute.gamma.ev.and.pv(fixed2, random2, param=param)
   } else {
     qi2<-qi1
     qi2$ev<-NA

@@ -3,7 +3,7 @@
 \title{Interface between the Zelig Model poisson.mixed and
 the Pre-existing Model-fitting Method}
 \usage{
-  zelig2poisson.mixed(formula, family = gaussian, ...,
+  zelig2poisson.mixed(formula, family = poisson, ...,
     data)
 }
 \arguments{

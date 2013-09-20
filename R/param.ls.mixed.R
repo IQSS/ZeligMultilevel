@@ -5,7 +5,7 @@ param.ls.mixed <- function(obj, num=1000, ...) {
   obj <- GetObject(obj)
 
   # this is kludge, while functions are not being forwarded correctly
-  sigma <- getMethod('sigma', 'mer')
+  # sigma <- getMethod('sigma', 'mer')  # This approach failed.
 
   fixed <- fixef(obj)
   vars <- ranef(obj, postVars=TRUE)
@@ -23,7 +23,7 @@ param.ls.mixed <- function(obj, num=1000, ...) {
 
   names(gammas) <- names(vars)
   betas <- mvrnorm(num, fixef(obj), vcov(obj))
-  scale <- sigma(obj)
+  scale <- lme4::sigma(obj)
 
   list(
        coef = betas,

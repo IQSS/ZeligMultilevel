@@ -8,7 +8,7 @@
 #' @param data a data.frame 
 #' @return a list specifying '.function'
 #' @export
-zelig2poisson.mixed <- function (formula, family=gaussian, ..., data) {
+zelig2poisson.mixed <- function (formula, family=poisson, ..., data) {
 
   formula <- tolmerFormat(reduceMI(formula))
 
