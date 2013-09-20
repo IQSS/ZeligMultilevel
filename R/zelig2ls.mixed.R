@@ -8,7 +8,7 @@
 #' @param data a data.frame 
 #' @return a list specifying '.function'
 #' @export
-zelig2ls.mixed <- function (formula, ..., data) {
+zelig2ls.mixed <- function (formula, family=NA, ..., data) {
   if (!missing(family))
     warning("family parameter is ignored for the `ls.mixed' model")
 
