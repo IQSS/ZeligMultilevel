@@ -1,3 +1,4 @@
+
 library(ZeligMultilevel)
 
 data(coalition2)
@@ -24,7 +25,7 @@ s.out <- sim(z.out, x = x.low, x1=x.high, num = 10)
 
 z.out <- zelig(
                vote ~ education + age + female + tag(1 | state),
-               data = voteincome[1:100, ],
+               data = voteincome,
                model="logit.mixed"
                )
 
@@ -37,7 +38,7 @@ s.out <- sim(z.out, x = x.low, x1 = x.high, num = 10)
 
 z.out <- zelig(
                income ~ education + age + female + tag(1 | state),
-               data=voteincome[1:100, ],
+               data=voteincome,
                model="ls.mixed"
                )
 
