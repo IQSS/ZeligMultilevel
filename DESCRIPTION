@@ -4,7 +4,7 @@ License: GPL (>=2)
 Title: Multilevel Regressions for Zelig
 Author: Matthew Owen, Ferdinand Alimadhi, Delia Bailey
 Description: Add-on package for Zelig. Enables the use of multilevel (mixed-effect) models.
-Version: 0.7-1
+Version: 0.7-2
 URL: http://projects.iq.harvard.edu/zelig
 Date: 2013-09-12
 Depends:
