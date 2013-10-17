@@ -29,8 +29,8 @@ z.out <- zelig(
                model="logit.mixed"
                )
 
-x.low <- setx(z.out, education=quantile(education, 0.8))
-x.high <- setx(z.out, education=quantile(education, 0.2))
+x.low <- setx(z.out, education=quantile(voteincome$education, 0.8))
+x.high <- setx(z.out, education=quantile(voteincome$education, 0.2))
 
 s.out <- sim(z.out, x = x.low, x1 = x.high, num = 10)
 
@@ -42,8 +42,8 @@ z.out <- zelig(
                model="ls.mixed"
                )
 
-x.low <- setx(z.out, education=quantile(education, 0.8))
-x.high <- setx(z.out, education=quantile(education, 0.2))
+x.low <- setx(z.out, education=quantile(voteincome$education, 0.8))
+x.high <- setx(z.out, education=quantile(voteincome$education, 0.2))
 
 s.out <- sim(z.out, x = x.low, x1 = x.high, num = 10)
 
