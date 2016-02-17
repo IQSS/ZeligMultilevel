@@ -1,8 +1,11 @@
 # ls.mixed unit test
 
-library(ZeligMixed)
+# library(ZeligMixed)
 
+library(Zelig)
 data(voteincome)
+
+
 
 z.out <- zelig(
                income ~ education + age + female + tag(1 | state),
@@ -20,3 +23,19 @@ vcov(z.out)
 coef(z.out)
 x.low
 x.high
+
+##----- lmer
+
+library(lme4)
+
+data("sleepstudy")
+
+fm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
+
+fm1
+summary(fm1)
+
+z5 <- zlsmixed$new()
+z5
+z5$zelig(Reaction ~ Days + (Days | Subject), sleepstudy)
+z5
