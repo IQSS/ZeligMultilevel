@@ -5,3 +5,5 @@
 ^man/param\..*
 ^man/describe\..*
 ^man/\..*
+^.*\.Rproj$
+^\.Rproj\.user$
