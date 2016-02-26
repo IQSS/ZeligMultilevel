@@ -35,7 +35,49 @@ fm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
 fm1
 summary(fm1)
 
+formula(fm1)
+
+head(model.matrix(fm1))
+head(model.frame(fm1))
+
+head(model.matrix(fm1, type = "fixed"))
+head(model.matrix(fm1, type = "random"))
+
+lme4:::model.matrix.merMod
+
+fixef(fm1)
+ranef(fm1)
+
 z5 <- zlsmixed$new()
 z5
 z5$zelig(Reaction ~ Days + (Days | Subject), sleepstudy)
 z5
+
+data(voteincome)
+z5 <- zlsmixed()
+z5$zelig(income ~ education + age + female + (1 | state), voteincome)
+z5
+
+ff <- lmer(income ~ education + age + female + (1 | state), voteincome)
+summary(ff)
+
+head(model.matrix(ff))
+
+debug(z5$set)
+z5$setx()
+
+.self <- z5
+
+.self$data %>%
+  group_by_(.self$by) %>%
+  do(mm = model.matrix(.self$formula, reduce(dataset = ., s, formula = .self$formula, data = .self$data)))
+
+z.out <- .self$zelig.out$z.out[[1]]
+
+model.matrix(formula(z.out), voteincome)
+
+ff@frame
+
+ff@frame$income
+
+lme4:::model.matrix.merMod
