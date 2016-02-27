@@ -52,6 +52,25 @@ z5 <- zlsmixed$new()
 z5
 z5$zelig(Reaction ~ Days + (Days | Subject), sleepstudy)
 z5
+z5$setx(Days = 5)
+z5
+z5$sim()
+
+vcov(fm1)
+
+z.out <- z5$zelig.out$z.out[[1]]
+summary(z.out)
+
+formula(z.out, fixed.only = TRUE)
+loc_formula <- formula(z.out, fixed.only = TRUE)
+
+loc_data <- sleepstudy
+
+pred <- try(terms(fit <- lm(loc_formula, loc_data), "predvars"), silent = TRUE)
+
+head(model.frame(fm1, type = "fixed"))
+
+lme4:::formula.merMod
 
 data(voteincome)
 z5 <- zlsmixed()

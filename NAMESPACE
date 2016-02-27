@@ -6,3 +6,4 @@ exportClasses(
 )
 
 importFrom(methods, setRefClass)
+importFrom("MASS", "mvrnorm")

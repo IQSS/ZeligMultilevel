@@ -22,10 +22,38 @@ zlsmixed$methods(
 )
 
 zlsmixed$methods(
-  param = function(z.out) {
-    # return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
+  set = function(...) {
+    "Setting Explanatory Variable Values"
+    formula_fe <- formula(.self$zelig.out$z.out[[1]], fixed.only = TRUE)
+    s <-list(...)
+    # This eliminates warning messages when factor rhs passed to lm() model in reduce() utility function
+    if(.self$category=="multinomial"){  # Perhaps find more robust way to test if dep.var. is factor
+      f2 <- update(formula_fe, as.numeric(.) ~ .)
+    }else{
+      f2 <- formula_fe
+    }
+    f <- update(formula_fe, 1 ~ .)      
+    # update <- na.omit(.self$data) %>% # remove missing values
+    update <- .self$data %>%
+      group_by_(.self$by) %>%
+      do(mm = model.matrix(f, reduce(dataset = ., s, 
+                                     formula = f2, 
+                                     data = .self$data)))
+    return(update)
   }
 )
+
+zlsmixed$methods(
+  param = function(z.out) {
+    return(list(simparam=mvrnorm(.self$num, coef(z.out), vcov(z.out)), simalpha=rep( summary(z.out)$sigma, .self$num) )  )
+  }
+)
+
+# zlsmixed$methods(
+#   param = function(z.out) {
+#     # return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
+#   }
+# )
 
 zlsmixed$methods(
   # From Zelig 4

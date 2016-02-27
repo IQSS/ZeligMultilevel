@@ -13,4 +13,5 @@ Depends:
     lme4
 Collate:
     "model-ls-mixed.R"
+    "utils.R"
 
