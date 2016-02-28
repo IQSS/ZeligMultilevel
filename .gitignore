@@ -1,3 +1,4 @@
 tests/*.pdf
 man/.*
 .Rproj.user
+.Rhistory

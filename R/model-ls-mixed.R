@@ -45,7 +45,10 @@ zlsmixed$methods(
 
 zlsmixed$methods(
   param = function(z.out) {
-    return(list(simparam=mvrnorm(.self$num, coef(z.out), vcov(z.out)), simalpha=rep( summary(z.out)$sigma, .self$num) )  )
+    # summary(z.out)$sigma: scale estimate
+    return(list(simparam = mvrnorm(.self$num, fixef(z.out), vcov(z.out)),
+                # simalpha = rep(summary(z.out)$sigma, .self$num),
+                simalpha = summary(z.out)$sigma))
   }
 )
 
@@ -56,7 +59,18 @@ zlsmixed$methods(
 # )
 
 zlsmixed$methods(
-  # From Zelig 4
   qi = function(simparam, mm) {
+    ev <- simparam$simparam %*% t(mm)
+    pv <- as.matrix(rnorm(n = length(ev), mean = ev,  sd = simparam$simalpha),
+                    nrow = length(ev),
+                    ncol = 1)
+    # pv <- ev
+    return(list(ev = ev, pv = pv))
   }
 )
+
+# zlsmixed$methods(
+#   # From Zelig 4
+#   qi = function(simparam, mm) {
+#   }
+# )

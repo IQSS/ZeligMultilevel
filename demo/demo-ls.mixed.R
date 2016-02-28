@@ -3,48 +3,18 @@
 # library(ZeligMixed)
 
 library(Zelig)
-data(voteincome)
-
-
-
-z.out <- zelig(
-               income ~ education + age + female + tag(1 | state),
-               data=voteincome,
-               model="ls.mixed"
-               )
-
-x.low <- setx(z.out, education=quantile(voteincome$education, 0.8))
-x.high <- setx(z.out, education=quantile(voteincome$education, 0.2))
-
-s.out <- sim(z.out, x = x.low, x1 = x.high)
-
-summary(z.out)
-vcov(z.out)
-coef(z.out)
-x.low
-x.high
 
 ##----- lmer
-
 library(lme4)
-
 data("sleepstudy")
-
 fm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
-
 fm1
 summary(fm1)
-
 formula(fm1)
-
 head(model.matrix(fm1))
 head(model.frame(fm1))
-
 head(model.matrix(fm1, type = "fixed"))
 head(model.matrix(fm1, type = "random"))
-
-lme4:::model.matrix.merMod
-
 fixef(fm1)
 ranef(fm1)
 
@@ -56,47 +26,21 @@ z5$setx(Days = 5)
 z5
 z5$sim()
 
+z5$sim.out
+# z5$simparam$simparam[[1]][[1]]
+z5
 vcov(fm1)
 
-z.out <- z5$zelig.out$z.out[[1]]
+data("voteincome")
+
+zz <- zlsmixed$new()
+zz$zelig(income ~ education + age + female + (1 | state), data = voteincome)
+zz
+zz$setx(education = quantile(voteincome$education, 0.8))
+zz$setx1(education = quantile(voteincome$education, 0.2))
+zz$sim()
+zz$simparam$simparam
+zz
+plot(zz)
+
 summary(z.out)
-
-formula(z.out, fixed.only = TRUE)
-loc_formula <- formula(z.out, fixed.only = TRUE)
-
-loc_data <- sleepstudy
-
-pred <- try(terms(fit <- lm(loc_formula, loc_data), "predvars"), silent = TRUE)
-
-head(model.frame(fm1, type = "fixed"))
-
-lme4:::formula.merMod
-
-data(voteincome)
-z5 <- zlsmixed()
-z5$zelig(income ~ education + age + female + (1 | state), voteincome)
-z5
-
-ff <- lmer(income ~ education + age + female + (1 | state), voteincome)
-summary(ff)
-
-head(model.matrix(ff))
-
-debug(z5$set)
-z5$setx()
-
-.self <- z5
-
-.self$data %>%
-  group_by_(.self$by) %>%
-  do(mm = model.matrix(.self$formula, reduce(dataset = ., s, formula = .self$formula, data = .self$data)))
-
-z.out <- .self$zelig.out$z.out[[1]]
-
-model.matrix(formula(z.out), voteincome)
-
-ff@frame
-
-ff@frame$income
-
-lme4:::model.matrix.merMod
