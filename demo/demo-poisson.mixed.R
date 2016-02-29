@@ -1,15 +1,11 @@
-# poisson.mixed unit test
-
-library(ZeligMixed)
-
 data(homerun)
 
-z.out <- zelig(homeruns ~ player + tag(player - 1 | month),
-                   data=homerun, model="poisson.mixed")
-
-x.out <- setx(z.out)
-
-s.out <- sim(z.out, x = x.out)
-
-summary(s.out)
-vcov(z.out)
+z5 <- zpoissonmixed$new()
+z5
+z5$zelig(homeruns ~ player + (player - 1 | month), homerun)
+z5
+z5$setx(player = "McGwire")
+z5
+z5$setx()
+z5$sim()
+z5

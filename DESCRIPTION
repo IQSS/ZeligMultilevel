@@ -12,6 +12,8 @@ Depends:
     dplyr,
     lme4
 Collate:
+    "model-mixed.R"
     "model-ls-mixed.R"
+    "model-poisson-mixed.R"
     "utils.R"
 

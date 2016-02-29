@@ -2,7 +2,9 @@ import(methods, Zelig, lme4, dplyr)
 
 exportPattern("^[[:alpha:]]+")
 exportClasses(
-     "Zelig-lsmixed"
+  "Zelig-mixed",
+  "Zelig-lsmixed",
+  "Zelig-poissonmixed"
 )
 
 importFrom(methods, setRefClass)
