@@ -17,6 +17,7 @@ head(model.matrix(fm1, type = "fixed"))
 head(model.matrix(fm1, type = "random"))
 fixef(fm1)
 ranef(fm1)
+formula(fm1, fixed.only = TRUE)
 
 z5 <- zlsmixed$new()
 z5

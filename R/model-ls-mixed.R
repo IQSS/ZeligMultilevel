@@ -52,25 +52,31 @@ zlsmixed$methods(
   }
 )
 
-# zlsmixed$methods(
-#   param = function(z.out) {
-#     # return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
-#   }
-# )
-
 zlsmixed$methods(
   qi = function(simparam, mm) {
     ev <- simparam$simparam %*% t(mm)
-    pv <- as.matrix(rnorm(n = length(ev), mean = ev,  sd = simparam$simalpha),
+    pv <- as.matrix(rnorm(n = length(ev), mean = ev, sd = simparam$simalpha),
                     nrow = length(ev),
                     ncol = 1)
-    # pv <- ev
     return(list(ev = ev, pv = pv))
   }
 )
 
 # zlsmixed$methods(
-#   # From Zelig 4
-#   qi = function(simparam, mm) {
+#   mcfun = function(x, b0 = 0, b1 = 1, alpha = 1, sim = TRUE) {
+#     y <- b0 + b1*x + sim * rnorm(n = length(x), sd = alpha)
+#     return(y)
 #   }
 # )
+
+# zlsmixed$methods((
+#   mcfun = function(x, ) {
+#     N <- 100
+#     nj <- 100
+#     g00 <- 10
+#     e <- rnorm(N * nj)
+#     j <- c(sapply(1:N, function(x) rep(x, nj)))
+#     uj <- c(sapply(1:N, function(x) rep(rnorm(1), nj)))
+#     y <- g00+uj+e 
+#   }
+# ))
