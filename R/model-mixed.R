@@ -21,9 +21,6 @@ zmixed$methods(
     callSuper(formula = formula, data = data, ..., weights = NULL, by = by)
     .self$formula.full <- .self$formula # fixed and random effects
     .self$formula <- formula(.self$zelig.out$z.out[[1]], fixed.only = TRUE) # fixed effects only
+    # lme4:::getFixedFormula(.self$formula.full)
   }
 )
-
-# .self <- z5
-# paste0(.self$family, '(', .self$link, ')')
-# .self$model.call$family <- paste0(.self$family, '(', .self$link, ')')

@@ -29,8 +29,18 @@ z5
 z5$zelig(duration ~ invest + fract + polar + numst2 + crisis + (1 | country), coalition2)
 z5
 z5$model.call
-z5$setx(player = "McGwire")
+z5$setx(polar = 12)
 z5
-z5$setx()
 z5$sim()
 z5
+
+z.out <- z5$zelig.out$z.out[[1]]
+z.out
+summary(z.out)
+vcov(z.out)
+fixef(z.out)
+s <- summary(z.out)
+s$sigma
+lme4:::getFixedFormula(.self$formula.full)
+
+shape <- 1/sigma(z.out)^2 # https://github.com/lme4/lme4/issues/291
