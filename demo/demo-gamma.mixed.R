@@ -19,3 +19,18 @@ x.low <- setx(z.out, numst2 = 0)
 s.out <- sim(z.out, x = x.low, x1=x.high)
 
 summary(s.out)
+
+
+zz <- glmer(formula = duration ~ invest + fract + polar + numst2 + crisis + (1 | country), data = coalition2, family = Gamma(link="log"))
+summary(zz)
+
+z5 <- zgammamixed$new()
+z5
+z5$zelig(duration ~ invest + fract + polar + numst2 + crisis + (1 | country), coalition2)
+z5
+z5$model.call
+z5$setx(player = "McGwire")
+z5
+z5$setx()
+z5$sim()
+z5

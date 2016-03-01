@@ -13,6 +13,7 @@ Depends:
     lme4
 Collate:
     "model-mixed.R"
+    "model-gamma-mixed.R"
     "model-ls-mixed.R"
     "model-poisson-mixed.R"
     "utils.R"

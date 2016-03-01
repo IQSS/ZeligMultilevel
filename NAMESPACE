@@ -3,6 +3,7 @@ import(methods, Zelig, lme4, dplyr)
 exportPattern("^[[:alpha:]]+")
 exportClasses(
   "Zelig-mixed",
+  "Zelig-gammamixed",
   "Zelig-lsmixed",
   "Zelig-poissonmixed"
 )
