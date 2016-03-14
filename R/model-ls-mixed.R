@@ -25,23 +25,30 @@ zlsmixed$methods(
 
 zlsmixed$methods(
   param = function(z.out) {
-    # set fixed effects
-    betas <- fixef(z.out)
+    fixed <- fixef(z.out)
     vars <- ranef(z.out, condVar = TRUE)
     gammas <- NULL
     n.G <- length(vars)
     object <- summary(z.out)
-    for (m in 1:n.G) {
+    # sample fixed effects
+    betasF <- NULL
+    vcov.fix <- vcov(z.out)
+    if (length(fixed) > 0){
+      betasF <- MASS::mvrnorm(.self$num, fixed, vcov.fix)
+    }
+    # sample random effects
+    for (m in 1:n.G){
+      vars.m <- attr(vars[[m]], "postVar")
       V.beta <- VarCorr(z.out)[[m]]
-      gammas[[m]] <- MASS::mvrnorm(.self$num, rep(0, nrow(V.beta)), as.data.frame(V.beta))
+      J <- dim(vars.m)[1]
+      gammas[[m]] <- MASS::mvrnorm(.self$num, rep(0, J), V.beta)
     }
     names(gammas) <- names(vars)
+    betas <- betasF
     scale <- sigma(z.out)
-    # list(betas=betas, gammas=gammas, scale=scale)
-    # summary(z.out)$sigma: scale estimate
-    return(list(simparam = MASS::mvrnorm(.self$num, fixef(z.out), vcov(z.out)),
-                # simalpha = rep(summary(z.out)$sigma, .self$num),
-                simalpha = list(gammas = gammas, scale = scale)))
+    return(list(simparam = betas,
+           # simalpha = rep(summary(z.out)$sigma, .self$num),
+           simalpha = list(gammas = gammas, scale = scale)))
   }
 )
 
@@ -49,19 +56,18 @@ zlsmixed$methods(
   qi = function(simparam, mm) {
     eta <- simparam$simparam %*% t(mm)
     mu <- eta
-    print(mu)
     # ## For predicted values, add in random effects draws
     rTerms <- ranef(.self$zelig.out$z.out[[1]])
     for (i in 1:length(rTerms)){
       mu <- as.vector(mu) + as.matrix(simparam$simalpha$gammas[[names(rTerms[i])]]) %*% t(as.matrix(rTerms[[i]]))
     }
-      ev <- eta
-      n <- length(mu[, 1])
-      pr <- matrix(NA, nrow = nrow(mu), ncol = ncol(mu))
-      for (i in 1:ncol(mu)) {
-        pr[, i] <- rnorm(n, mean = mu[, i], sd = simparam$simalpha$scale)
-      }
-    return(list(ev = ev, pv = mu))
+    ev <- eta
+    n <- length(mu[, 1])
+    pv <- matrix(NA, nrow = nrow(mu), ncol = ncol(mu))
+    for (i in 1:ncol(mu)) {
+      pv[, i] <- rnorm(n, mean = mu[, i], sd = simparam$simalpha$scale)
+    }
+    return(list(ev = ev, pv = pv))
   }
 )
 
