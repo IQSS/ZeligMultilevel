@@ -25,9 +25,14 @@ z5$zelig(Reaction ~ Days + (Days | Subject), sleepstudy)
 z5
 z5$setx(Days = 5)
 z5
-z5$sim()
-
+z5$sim(num = 3)
+z5$simparam$simparam
 z5$sim.out
+z5$sim.out$x$ev
+z5
+arm::sim(z.out, 5)
+
+plot(z5)
 # z5$simparam$simparam[[1]][[1]]
 z5
 vcov(fm1)
