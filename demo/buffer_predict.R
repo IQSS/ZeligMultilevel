@@ -16,9 +16,12 @@ intFit <- predictInterval(gm2, newdata = d1[1:10, ], type = "linear.prediction")
 predict(m1, newdata = sleepstudy[11, ], type = "response")
 predict(m1, newdata = sleepstudy[11, ], type = "link")
 
-mm
+s <- arm::sim(m1, 3)
+s
 
 predict(fm1, newdata = sleepstudy[1, ], newparams = list(beta = s@fixef[3, ]),
         type = "link")
 mm[2] <- 3
 mm
+
+fitted(s, m1)

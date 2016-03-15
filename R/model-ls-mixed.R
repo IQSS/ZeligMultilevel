@@ -41,7 +41,7 @@ zlsmixed$methods(
       vars.m <- attr(vars[[m]], "postVar")
       V.beta <- VarCorr(z.out)[[m]]
       J <- dim(vars.m)[1]
-      gammas[[m]] <- MASS::mvrnorm(.self$num, rep(0, J), V.beta)
+      gammas[[m]] <- MASS::mvrnorm(.self$num, rep(0, J), as.data.frame(V.beta))
     }
     names(gammas) <- names(vars)
     betas <- betasF

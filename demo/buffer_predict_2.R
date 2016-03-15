@@ -80,7 +80,12 @@ function (object, newdata = NULL, newparams = NULL, re.form = NULL,
   }
   pred
 }
+s@sigma
+m2 <- lme4:::setParams(m1, list(beta = s@fixef[1, ]))
+set.seed(02138); arm::sim(m2, 3)
+set.seed(02138); arm::sim(m1, 3)
 
-fm2 <- lme4:::setParams(fm1, list(beta = s@fixef[1, ]))
-set.seed(02138); arm::sim(fm2, 3)
-set.seed(02138); arm::sim(fm1, 3)
+arm::sim(m2, 3)@fixef == arm::sim(m1, 3)@fixef
+arm::sim(m2, 3)@sigma == arm::sim(m1, 3)@sigma
+
+simulate(m1)
