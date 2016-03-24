@@ -6,6 +6,7 @@ library(Zelig)
 
 ##----- lmer
 library(lme4)
+library(arm)
 data("sleepstudy")
 fm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
 fm1
@@ -18,6 +19,9 @@ head(model.matrix(fm1, type = "random"))
 fixef(fm1)
 ranef(fm1)
 formula(fm1, fixed.only = TRUE)
+s <- arm::sim(fm1)
+head(fitted(s, fm1))
+
 
 z5 <- zlsmixed$new()
 z5
@@ -26,11 +30,20 @@ z5
 # z5$setx(Days = 5)
 z5$setx()
 z5
-z5$sim(num = 3)
+z5$sim(num = 10, group = "all", group.value = "352")
 z5$simparam$simparam
+V.beta
 z5$sim.out
 z5$sim.out$x$ev
+z5$sim.out$x$pv
+p <- z5$sim.out$x$pv[[1]]
+p[, "352", drop = FALSE]
+
+as.matrix(p[, colnames(p) == "352"])
+colnames(p)
+rownames(z5$sim.out$x$ev)
 z5
+z.out <- z5$zelig.out$z.out[[1]]
 arm::sim(z.out, 5)
 
 fixef(z.out)

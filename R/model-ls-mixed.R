@@ -1,5 +1,7 @@
 zlsmixed <- setRefClass("Zelig-lsmixed",
-                        fields = list(formula.full = "ANY"), # Zelig formula)
+                        fields = list(formula.full = "ANY",# Zelig formula)
+                                      group = "ANY", 
+                                      group.value = "ANY"),
                         contains = c("Zelig-mixed", "Zelig-ls"))
 
 zlsmixed$methods(
@@ -25,26 +27,25 @@ zlsmixed$methods(
 
 zlsmixed$methods(
   param = function(z.out) {
-    fixed <- fixef(z.out)
-    vars <- ranef(z.out, condVar = TRUE)
+    fixed_effects <- fixef(z.out)
+    random_effects <- ranef(z.out, condVar = TRUE)
     gammas <- NULL
-    n.G <- length(vars)
-    object <- summary(z.out)
+    # object <- summary(z.out)
     # sample fixed effects
-    betasF <- NULL
-    vcov.fix <- vcov(z.out)
-    if (length(fixed) > 0){
-      betasF <- MASS::mvrnorm(.self$num, fixed, vcov.fix)
+    if (length(fixed_effects) > 0){
+      betas <- MASS::mvrnorm(.self$num, fixed_effects, vcov(z.out))
     }
     # sample random effects
-    for (m in 1:n.G){
-      vars.m <- attr(vars[[m]], "postVar")
-      V.beta <- VarCorr(z.out)[[m]]
+    for (m in seq(random_effects)) {
+      vars.m <- attr(random_effects[[m]], "postVar")
+      V.beta <<- VarCorr(z.out)[[m]]
       J <- dim(vars.m)[1]
       gammas[[m]] <- MASS::mvrnorm(.self$num, rep(0, J), as.data.frame(V.beta))
     }
-    names(gammas) <- names(vars)
-    betas <- betasF
+    names(gammas) <- names(random_effects)
+    # for (i in seq(gamma)) {
+    #   rownames(gammas[[i]]) <- rownames(ranef(z.out, condVar = TRUE)[[1]])
+    # }
     scale <- sigma(z.out)
     return(list(simparam = betas,
            # simalpha = rep(summary(z.out)$sigma, .self$num),
@@ -54,20 +55,37 @@ zlsmixed$methods(
 
 zlsmixed$methods(
   qi = function(simparam, mm) {
-    eta <- simparam$simparam %*% t(mm)
-    mu <- eta
-    # ## For predicted values, add in random effects draws
-    rTerms <- ranef(.self$zelig.out$z.out[[1]])
-    for (i in 1:length(rTerms)){
-      mu <- as.vector(mu) + as.matrix(simparam$simalpha$gammas[[names(rTerms[i])]]) %*% t(as.matrix(rTerms[[i]]))
+    if (!is.null(.self$group))
+      print(.self$group)
+    mu <- simparam$simparam %*% t(mm) # corresponds to X * beta
+    rTerms <- ranef(.self$zelig.out$z.out[[1]]) # fix for the 'by' argument
+    # ## For predicted values, add in random effects draws according to "group" membership
+    if (.self$group == "none") {
+      pv <- 0
+    } else if (.self$group == "all") {
+      for (i in 1:length(rTerms)){
+        mu <- as.vector(mu) + as.matrix(simparam$simalpha$gammas[[names(rTerms[i])]]) %*% t(as.matrix(rTerms[[i]]))
+      }
+      n <- length(mu[, 1])
+      pv <- matrix(NA, nrow = nrow(mu), ncol = ncol(mu))
+      for (i in 1:ncol(mu)) {
+        pv[, i] <- rnorm(n, mean = mu[, i], sd = simparam$simalpha$scale)
+      }
+      colnames(pv) <- colnames(mu)
     }
-    ev <- eta
-    n <- length(mu[, 1])
-    pv <- matrix(NA, nrow = nrow(mu), ncol = ncol(mu))
-    for (i in 1:ncol(mu)) {
-      pv[, i] <- rnorm(n, mean = mu[, i], sd = simparam$simalpha$scale)
-    }
-    return(list(ev = ev, pv = pv))
+    if (!is.null(.self$group.value)) {
+      mu <- mu[, .self$group.value, drop = FALSE]
+      pv <- pv[, .self$group.value, drop = FALSE]
+    } 
+    return(list(ev = mu, pv = pv))
+  }
+)
+
+zlsmixed$methods(
+  sim = function(num = 1000, group = NULL, group.value = NULL) {
+    .self$group <- group
+    .self$group.value <- group.value
+    callSuper(num = num)
   }
 )
 
