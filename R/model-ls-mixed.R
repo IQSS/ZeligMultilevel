@@ -49,7 +49,7 @@ zlsmixed$methods(
     scale <- sigma(z.out)
     return(list(simparam = betas,
            # simalpha = rep(summary(z.out)$sigma, .self$num),
-           simalpha = list(gammas = gammas, scale = scale)))
+           simalpha = list(gammas = gammas, scale = scale, rTerms = random_effects)))
   }
 )
 
@@ -58,7 +58,8 @@ zlsmixed$methods(
     if (!is.null(.self$group))
       print(.self$group)
     mu <- simparam$simparam %*% t(mm) # corresponds to X * beta
-    rTerms <- ranef(.self$zelig.out$z.out[[1]]) # fix for the 'by' argument
+    # rTerms <- ranef(.self$zelig.out$z.out[[1]]) # fix for the 'by' argument
+    rTerms <- simparam$simalpha$rTerms
     # ## For predicted values, add in random effects draws according to "group" membership
     if (.self$group == "none") {
       pv <- 0
