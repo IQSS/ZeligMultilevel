@@ -1,5 +1,7 @@
 zmixed <- setRefClass("Zelig-mixed",
-                      fields = list(formula.full = "ANY"), # Zelig formula)
+                      fields = list(formula.full = "ANY",# Zelig formula)
+                                    group = "ANY", 
+                                    group.value = "ANY"),
                       contains = "Zelig")
 
 zmixed$methods(
@@ -22,5 +24,13 @@ zmixed$methods(
     .self$formula.full <- .self$formula # fixed and random effects
     .self$formula <- formula(.self$zelig.out$z.out[[1]], fixed.only = TRUE) # fixed effects only
     # lme4:::getFixedFormula(.self$formula.full)
+  }
+)
+
+zmixed$methods(
+  sim = function(num = 1000, group = NULL, group.value = NULL) {
+    .self$group <- group
+    .self$group.value <- group.value
+    callSuper(num = num)
   }
 )

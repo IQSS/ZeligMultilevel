@@ -1,16 +1,13 @@
 zlsmixed <- setRefClass("Zelig-lsmixed",
-                        fields = list(formula.full = "ANY",# Zelig formula)
-                                      group = "ANY", 
-                                      group.value = "ANY"),
                         contains = c("Zelig-mixed", "Zelig-ls"))
 
 zlsmixed$methods(
   initialize = function() {
     callSuper()
     .self$fn <- quote(lme4::lmer)
-    # .self$authors <- "Kosuke Imai, Gary King, Olivia Lau"
-    # .self$packageauthors <- "Thomas W. Yee"
-    # .self$year <- 2007
+    .self$authors <- "Ferdinand Alimadhi, Delia Bailey"
+    .self$packageauthors <- "Douglas Bates [aut], Martin Maechler [aut], Ben Bolker [aut, cre], Steven Walker [aut], Rune Haubo Bojesen Christensen [ctb], Henrik Singmann [ctb], Bin Dai [ctb], Gabor Grothendieck [ctb], Peter Green [ctb]"
+    .self$year <- 2012
     .self$category <- "continuous"
   }
 )
@@ -82,10 +79,3 @@ zlsmixed$methods(
   }
 )
 
-zlsmixed$methods(
-  sim = function(num = 1000, group = NULL, group.value = NULL) {
-    .self$group <- group
-    .self$group.value <- group.value
-    callSuper(num = num)
-  }
-)

@@ -31,6 +31,7 @@ z5
 z5$setx()
 z5
 z5$sim(num = 10, group = "all", group.value = "352")
+z5
 z5$simparam$simparam
 V.beta
 z5$sim.out
