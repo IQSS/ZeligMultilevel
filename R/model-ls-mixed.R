@@ -4,11 +4,13 @@ zlsmixed <- setRefClass("Zelig-lsmixed",
 zlsmixed$methods(
   initialize = function() {
     callSuper()
+    .self$name <- "ls.mixed"
     .self$fn <- quote(lme4::lmer)
     .self$authors <- "Ferdinand Alimadhi, Delia Bailey"
     .self$packageauthors <- "Douglas Bates [aut], Martin Maechler [aut], Ben Bolker [aut, cre], Steven Walker [aut], Rune Haubo Bojesen Christensen [ctb], Henrik Singmann [ctb], Bin Dai [ctb], Gabor Grothendieck [ctb], Peter Green [ctb]"
     .self$year <- 2012
     .self$category <- "continuous"
+    .self$wrapper <- "ls.mixed"
   }
 )
 

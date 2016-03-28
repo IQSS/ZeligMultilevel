@@ -1,10 +1,13 @@
 zpoissonmixed <- setRefClass("Zelig-poissonmixed",
-                        fields = list(formula.full = "ANY"), # Zelig formula)
+                        fields = list(family = "ANY",
+                                      link = "ANY",
+                                      linkinv = "ANY"),
                         contains = c("Zelig-mixed", "Zelig-poisson"))
 
 zpoissonmixed$methods(
   initialize = function() {
     callSuper()
+    .self$name <- "poisson.mixed"
     .self$fn <- quote(lme4::glmer)
     # .self$authors <- "Kosuke Imai, Gary King, Olivia Lau"
     # .self$packageauthors <- "Thomas W. Yee"
@@ -13,6 +16,7 @@ zpoissonmixed$methods(
     .self$family <- "poisson"
     .self$link <- "log"
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
+    .self
   }
 )
 
@@ -31,22 +35,3 @@ zpoissonmixed$methods(
 #     return(list(ev = ev, pv = pv))
 #   }
 # )
-
-# zpoissonmixed$methods(
-#   mcfun = function(x, b0 = 0, b1 = 1, alpha = 1, sim = TRUE) {
-#     y <- b0 + b1*x + sim * rnorm(n = length(x), sd = alpha)
-#     return(y)
-#   }
-# )
-
-# zpoissonmixed$methods((
-#   mcfun = function(x, ) {
-#     N <- 100
-#     nj <- 100
-#     g00 <- 10
-#     e <- rnorm(N * nj)
-#     j <- c(sapply(1:N, function(x) rep(x, nj)))
-#     uj <- c(sapply(1:N, function(x) rep(rnorm(1), nj)))
-#     y <- g00+uj+e 
-#   }
-# ))
