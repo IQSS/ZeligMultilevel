@@ -1,5 +1,5 @@
 zlsmixed <- setRefClass("Zelig-lsmixed",
-                        contains = c("Zelig-mixed", "Zelig-ls"))
+                        contains = c("Zelig-mixed"))
 
 zlsmixed$methods(
   initialize = function() {

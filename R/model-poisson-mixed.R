@@ -2,7 +2,7 @@ zpoissonmixed <- setRefClass("Zelig-poissonmixed",
                         fields = list(family = "ANY",
                                       link = "ANY",
                                       linkinv = "ANY"),
-                        contains = c("Zelig-mixed", "Zelig-poisson"))
+                        contains = c("Zelig-mixed"))
 
 zpoissonmixed$methods(
   initialize = function() {
