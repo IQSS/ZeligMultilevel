@@ -9,9 +9,6 @@ zpoissonmixed$methods(
     callSuper()
     .self$name <- "poisson.mixed"
     .self$fn <- quote(lme4::glmer)
-    # .self$authors <- "Kosuke Imai, Gary King, Olivia Lau"
-    # .self$packageauthors <- "Thomas W. Yee"
-    # .self$year <- 2007
     .self$category <- "discrete"
     .self$family <- "poisson"
     .self$link <- "log"
