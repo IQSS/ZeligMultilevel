@@ -25,27 +25,35 @@ zlsmixed$methods(
   qi = function(simparam, mm) {
     if (!is.null(.self$group))
       print(.self$group)
-    mu <- simparam$simparam %*% t(mm) # corresponds to X * beta
-    # rTerms <- ranef(.self$zelig.out$z.out[[1]]) # fix for the 'by' argument
     rTerms <- simparam$simalpha$rTerms
     # ## For predicted values, add in random effects draws according to "group" membership
-    if (.self$group == "none") {
-      pv <- 0
-    } else if (.self$group == "all") {
+    if (.self$group == "all") {
       for (i in 1:length(rTerms)){
-        mu <- as.vector(mu) + as.matrix(simparam$simalpha$gammas[[names(rTerms[i])]]) %*% t(as.matrix(rTerms[[i]]))
-      }
+        mu <<- as.vector(mu) + as.matrix(simparam$simalpha$gammas[[names(rTerms[i])]]) %*% t(as.matrix(rTerms[[i]]))
+        }
       n <- length(mu[, 1])
       pv <- matrix(NA, nrow = nrow(mu), ncol = ncol(mu))
       for (i in 1:ncol(mu)) {
         pv[, i] <- rnorm(n, mean = mu[, i], sd = simparam$simalpha$scale)
       }
       colnames(pv) <- colnames(mu)
+      PR <<- pv
     }
     if (!is.null(.self$group.value)) {
       mu <- mu[, .self$group.value, drop = FALSE]
       pv <- pv[, .self$group.value, drop = FALSE]
-    } 
+    } else if (.self$group == "none") {
+      for (i in 1:length(rTerms)){
+        mu <- as.vector(mu) + as.matrix(simparam$simalpha$gammas[[names(rTerms[i])]]) %*% t(as.matrix(rTerms[[i]]))
+      }
+      n <- length(mu[, 1])
+      mu <- as.matrix(apply(mu, MARGIN = 1, sample, 1)) # take one group at random
+      MU_NONE <<- mu
+      pv <- matrix(NA, nrow = nrow(mu), ncol = ncol(mu))
+      for (i in 1:ncol(mu)) {
+        pv[, i] <- rnorm(n, mean = mu[, i], sd = simparam$simalpha$scale)
+      }
+    }
     return(list(ev = mu, pv = pv))
   }
 )

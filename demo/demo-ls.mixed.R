@@ -22,6 +22,7 @@ formula(fm1, fixed.only = TRUE)
 s <- arm::sim(fm1)
 head(fitted(s, fm1))
 
+##----- Zelig
 
 z5 <- zlsmixed$new()
 z5
@@ -30,6 +31,19 @@ z5
 # z5$setx(Days = 5)
 z5$setx()
 z5
+
+z5$sim(num = 10, group = "none")
+z5
+plot(z5)
+z5$simparam$simparam
+z5$sim.out$x$pv[[1]]
+
+z5$sim(num = 10, group = "all")
+z5
+z5$simparam$simparam
+z5$sim.out$x$pv[[1]]
+
+
 z5$sim(num = 10, group = "all", group.value = "352")
 z5
 z5$simparam$simparam
