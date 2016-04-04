@@ -19,8 +19,10 @@ head(model.matrix(fm1, type = "random"))
 fixef(fm1)
 ranef(fm1)
 formula(fm1, fixed.only = TRUE)
-s <- arm::sim(fm1)
+s <- arm::sim(fm1, 5)
+s
 head(fitted(s, fm1))
+fitted
 
 ##----- Zelig
 
@@ -32,17 +34,33 @@ z5
 z5$setx()
 z5
 
+z5 <- zlsmixed$new()
+z5
+z5$zelig(Reaction ~ Days + (Days | Subject), sleepstudy)
+z5$setx()
 z5$sim(num = 10, group = "none")
 z5
 plot(z5)
 z5$simparam$simparam
 z5$sim.out$x$pv[[1]]
 
+z5 <- zlsmixed$new()
+z5
+z5$zelig(Reaction ~ Days + (Days | Subject), sleepstudy)
+z5
+# z5$setx(Days = 5)
+z5$setx()
+z5
 z5$sim(num = 10, group = "all")
 z5
 z5$simparam$simparam
 z5$sim.out$x$pv[[1]]
+plot(z5)
 
+z.out <- z5$zelig.out$z.out[[1]]
+s <- arm::sim(z.out, 5)
+f <- fitted(s, z.out)
+summary(colMeans(f))
 
 z5$sim(num = 10, group = "all", group.value = "352")
 z5
