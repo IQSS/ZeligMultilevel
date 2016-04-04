@@ -18,7 +18,7 @@ zmixed$methods(
   zelig = function(formula, data, ..., weights = NULL, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- match.call(expand.dots = TRUE)
-    # .self$model.call$family <- .self$family.lme4
+    # .self$call$family <- .self$family.lme4
     # .self$model.call$family <- paste0(.self$family, '(', .self$link, ')')
     callSuper(formula = formula, data = data, ..., weights = NULL, by = by)
     .self$formula.full <- .self$formula # fixed and random effects

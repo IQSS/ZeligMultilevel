@@ -25,7 +25,7 @@ zlsmixed$methods(
   qi = function(simparam, mm) {
     if (!is.null(.self$group))
       print(.self$group)
-    mu <- simparam$simparam %*% t(mm) # corresponds to X * beta
+    mu <- eta <- simparam$simparam %*% t(mm) # corresponds to X * beta
     rTerms <- simparam$simalpha$rTerms
     # ## For predicted values, add in random effects draws according to "group" membership
     # if (.self$group == "all") {
@@ -56,7 +56,7 @@ zlsmixed$methods(
 #         pv[, i] <- rnorm(n, mean = mu[, i], sd = simparam$simalpha$scale)
 #       }
 #     }
-    return(list(ev = mu, pv = pv))
+    return(list(ev = eta, pv = pv))
   }
 )
 
