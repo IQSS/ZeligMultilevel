@@ -13,8 +13,8 @@ head(model.matrix(fm1, type = "random"))
 formula(fm1, fixed.only = TRUE)
 sims <- arm::sim(fm1, 5)
 sims
-head(f <- fitted(s, fm1))
-fitted
+head(f <- fitted(sims, fm1))
+f
 
 fixed_effects <- fixef(fm1)
 random_effects <- ranef(fm1)
@@ -23,13 +23,15 @@ sim_fixed_effects <- sims@fixef
 sim_random_effects <- sims@ranef
 
 # sim_random_effects$Subject[, "308", ]
-unique(rownames(getME(fm1, "Zt")))
+unique(rownames(Zt <- getME(fm1, "Zt")))
 
 dim(sim_random_effects$Subject)
 
 
 mm <- colMeans(model.matrix(fm1))
 betas <- sim_fixed_effects %*% mm # betas
+
+names(sim_random_effects)
 
 si <- sim_random_effects$Subject[, "308", ]
 colnames(Zt)
@@ -49,8 +51,6 @@ fm2<-lmer(Reaction~Days+(Days|Subject), sleepstudy)
 
 Xi <- getME(fm2,"mmList")
 Xi
-
-
 
 data("Pixel", package="nlme")
 mform <- formula(fm1)
