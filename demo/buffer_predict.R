@@ -10,6 +10,7 @@ gm2 <- glmer(y ~ period + (1 | herd), family = binomial, data = d1,
 regFit <- predict(gm2, newdata = d1[1:10, ])
 # get probabilities
 regFit <- predict(gm2, newdata = d1[1:10, ], type = "response")
+library(merTools)
 intFit <- predictInterval(gm2, newdata = d1[1:10, ], type = "probability")
 intFit <- predictInterval(gm2, newdata = d1[1:10, ], type = "linear.prediction")
 
@@ -25,3 +26,4 @@ mm[2] <- 3
 mm
 
 fitted(s, m1)
+

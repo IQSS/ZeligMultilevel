@@ -29,29 +29,7 @@ zmixed$methods(
 
 zmixed$methods(
   param = function(z.out) {
-    fixed_effects <- fixef(z.out)
-    random_effects <- ranef(z.out, condVar = TRUE)
-    gammas <- NULL
-    # object <- summary(z.out)
-    # sample fixed effects
-    if (length(fixed_effects) > 0){
-      betas <- MASS::mvrnorm(.self$num, fixed_effects, vcov(z.out))
-    }
-    # sample random effects
-    for (m in seq(random_effects)) {
-      vars.m <- attr(random_effects[[m]], "postVar")
-      V.beta <<- VarCorr(z.out)[[m]]
-      J <- dim(vars.m)[1]
-      gammas[[m]] <- MASS::mvrnorm(.self$num, rep(0, J), as.data.frame(V.beta))
-    }
-    names(gammas) <- names(random_effects)
-    # for (i in seq(gamma)) {
-    #   rownames(gammas[[i]]) <- rownames(ranef(z.out, condVar = TRUE)[[1]])
-    # }
-    scale <- sigma(z.out)
-    return(list(simparam = betas,
-                # simalpha = rep(summary(z.out)$sigma, .self$num),
-                simalpha = list(gammas = gammas, scale = scale, rTerms = random_effects)))
+    return(list(simparam = arm::sim(z.out, .self$num), simalpha = list(z.out = z.out)))
   }
 )
 

@@ -22,27 +22,24 @@ random_effects <- ranef(fm1)
 sim_fixed_effects <- sims@fixef
 sim_random_effects <- sims@ranef
 
-sim_random_effects$Subject[, "308", ]
-getME(fm1, "Zt")
+# sim_random_effects$Subject[, "308", ]
+unique(rownames(getME(fm1, "Zt")))
+
+dim(sim_random_effects$Subject)
+
 
 mm <- colMeans(model.matrix(fm1))
-
 betas <- sim_fixed_effects %*% mm # betas
-
-f
-
-b <- cbind(sleepstudy, f)
-b[b$Subject == "308", ]
 
 si <- sim_random_effects$Subject[, "308", ]
 colnames(Zt)
-Zt[, names(Zt) == "309"]
-zi <- Zt[rownames(Zt) == "309", ]
+zi <- Zt[rownames(Zt) == "308", ]
+zi
+z <- zi[, apply(zi, 2, function(x) sum(x) != 0)]
 
-p <- si %*% zi
-tp <- t(p[, 1:10])
+p <- si %*% z
 
-as.vector(betas) + as.matrix(tp)
+t(as.vector(betas) + as.matrix(p))
 
 library(lme4)
 data(sleepstudy)
@@ -53,4 +50,14 @@ fm2<-lmer(Reaction~Days+(Days|Subject), sleepstudy)
 Xi <- getME(fm2,"mmList")
 Xi
 
-getME(fm2, "Zt")
+
+
+data("Pixel", package="nlme")
+mform <- formula(fm1)
+(bar.f <- findbars(mform)) # list with 3 terms
+mf <- model.frame(subbars(mform),data=sleepstudy)
+rt <- mkReTrms(bar.f,mf)
+names(rt)
+rt$Ztlist
+
+mf <- model.frame(subbars(),data=sleepstudy)

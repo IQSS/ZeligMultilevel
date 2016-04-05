@@ -38,7 +38,7 @@ z5 <- zlsmixed$new()
 z5
 z5$zelig(Reaction ~ Days + (Days | Subject), sleepstudy)
 z5$setx()
-z5$sim(num = 100, group = "none")
+z5$sim(num = 10, group = "none")
 z5
 plot(z5)
 z5$simparam$simparam
