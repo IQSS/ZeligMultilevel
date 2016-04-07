@@ -26,10 +26,13 @@ sim_random_effects <- sims@ranef
 unique(rownames(Zt <- getME(fm1, "Zt")))
 
 dim(sim_random_effects$Subject)
-
+Zt
 
 mm <- colMeans(model.matrix(fm1))
+mm
+sim_fixed_effects
 betas <- sim_fixed_effects %*% mm # betas
+betas
 
 names(sim_random_effects)
 
@@ -42,6 +45,7 @@ z <- zi[, apply(zi, 2, function(x) sum(x) != 0)]
 p <- si %*% z
 
 t(as.vector(betas) + as.matrix(p))
+rowMeans(t(as.vector(betas) + as.matrix(p)))
 
 library(lme4)
 data(sleepstudy)
