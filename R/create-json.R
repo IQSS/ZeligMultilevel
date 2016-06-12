@@ -25,11 +25,11 @@ createJSONzeligmixed <- function() {
   z5probitmixed <- zprobitmixed()
   z5probitmixed$toJSON()
   
-  zeligmixedmodels <- list(zelig5mixedmodels = list("gamma-mixed" = z5gammamixed$ljson,
-                                                    "logit-mixed" = z5logitmixed$ljson,
-                                                    "ls-mixed" = z5lsmixed$ljson,
-                                                    "poisson-mixed" = z5bpoissonmixed$ljson,
-                                                    "probit-mixed" = z5probitmixed$ljson))
+  zeligmixedmodels <- list(zelig5mixedmodels = list("gamma.mixed" = z5gammamixed$ljson,
+                                                    "logit.mixed" = z5logitmixed$ljson,
+                                                    "ls.mixed" = z5lsmixed$ljson,
+                                                    "poisson.mixed" = z5bpoissonmixed$ljson,
+                                                    "probit.mixed" = z5probitmixed$ljson))
   
   # cat(jsonlite::toJSON(zeligchoicemodels, pretty = TRUE),
   #     file = file.path("inst/JSON", "zelig5choicemodels.json"))

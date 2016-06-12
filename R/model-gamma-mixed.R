@@ -12,6 +12,7 @@ zgammamixed$methods(
     .self$link <- "log"
     .self$family.lme4 <- quote(Gamma('log'))
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
+    .self$wrapper <- "gamma.mixed"
   }
 )
 

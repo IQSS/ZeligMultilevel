@@ -13,6 +13,7 @@ zpoissonmixed$methods(
     .self$family <- "poisson"
     .self$link <- "log"
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
+    .self$wrapper <- "poisson.mixed"
   }
 )
 
