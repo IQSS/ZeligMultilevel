@@ -1,6 +1,6 @@
 {
   "zelig5mixedmodels": {
-    "gamma-mixed": {
+    "gammamixed": {
       "name": [],
       "description": [],
       "outcome": {
@@ -10,10 +10,10 @@
         "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-gammamixed.html"],
-      "wrapper": ["wrapper"],
+      "wrapper": ["gamma.mixed"],
       "tree": ["Zelig-gammamixed", "Zelig-mixed", "Zelig-gamma"]
     },
-    "logit-mixed": {
+    "logitmixed": {
       "name": [],
       "description": [],
       "outcome": {
@@ -23,10 +23,10 @@
         "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-logitmixed.html"],
-      "wrapper": ["wrapper"],
+      "wrapper": ["logit.mixed"],
       "tree": ["Zelig-logitmixed", "Zelig-mixed", "Zelig-logit"]
     },
-    "ls-mixed": {
+    "lsmixed": {
       "name": ["ls.mixed"],
       "description": [],
       "outcome": {
@@ -39,7 +39,7 @@
       "wrapper": ["ls.mixed"],
       "tree": ["Zelig-lsmixed", "Zelig-mixed"]
     },
-    "poisson-mixed": {
+    "poissonmixed": {
       "name": ["poisson.mixed"],
       "description": [],
       "outcome": {
@@ -49,10 +49,10 @@
         "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-poissonmixed.html"],
-      "wrapper": ["wrapper"],
+      "wrapper": ["poisson.mixed"],
       "tree": ["Zelig-poissonmixed", "Zelig-mixed"]
     },
-    "probit-mixed": {
+    "probitmixed": {
       "name": [],
       "description": [],
       "outcome": {
@@ -62,7 +62,7 @@
         "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
       },
       "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-probitmixed.html"],
-      "wrapper": ["wrapper"],
+      "wrapper": ["probit.mixed"],
       "tree": ["Zelig-probitmixed", "Zelig-mixed", "Zelig-probit"]
     }
   }
