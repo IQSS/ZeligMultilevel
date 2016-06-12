@@ -50,7 +50,6 @@ zmixed$methods(
       RE <- as.data.frame(RE)
       names(RE) <- group
       
-      # mm <- cbind(as.data.frame(mm), Subject = 308)
       mm <- cbind(as.data.frame(mm), RE)
       print(mm)
     } else {
@@ -69,7 +68,7 @@ zmixed$methods(
                                     returnSims = TRUE,
                                     type = .self$sim_type)
     
-    print(PI)
+    # print(PI)
     
     PI_all <- merTools::predictInterval(merMod = simparam$simparam,
                                         newdata = mm_all,
