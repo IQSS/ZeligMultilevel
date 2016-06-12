@@ -3,18 +3,26 @@ head(InstEval)
 
 m1 <- lmer(y ~ service + lectage + studage + (1|d) + (1|s), data=InstEval)
 
+names(ranef(m1))
+draw
+library(ZeligMultilevel)
+
+
 library(merTools)
 fastdisp(m1)
 
 feEx <- FEsim(m1, 1000)
 cbind(feEx[,1] , round(feEx[, 2:4], 3))
 
-arm::sim(m1, n.sims = 3)
 
 example1 <- draw(m1, type = 'random')
 head(example1)
 
+head(InstEval)
+ex <- list(studage = 5)
+
 PI <- predictInterval(m1, newdata = example1, n.sims = 10, returnSims = TRUE)
+PI <- predictInterval(m1, newdata = ex, n.sims = 10, returnSims = TRUE)
 yhat <- attr(PI, "sim.results")
 dim(yhat)
 yhat

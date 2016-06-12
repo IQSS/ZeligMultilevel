@@ -1,42 +1,81 @@
 zmixed <- setRefClass("Zelig-mixed",
-                      fields = list(formula.full = "ANY",# Zelig formula)
-                                    group = "ANY", 
-                                    group.value = "ANY"),
+                      fields = list(formula.full = "ANY",# Zelig formula
+                                    mm_RE = "ANY"), # group membership
                       contains = "Zelig")
 
 zmixed$methods(
   initialize = function() {
     callSuper()
     .self$fn <- quote(lme4::lmer)
-    .self$authors <- "Ferdinand Alimadhi, Delia Bailey"
     .self$packageauthors <- "Douglas Bates [aut], Martin Maechler [aut], Ben Bolker [aut, cre], Steven Walker [aut], Rune Haubo Bojesen Christensen [ctb], Henrik Singmann [ctb], Bin Dai [ctb], Gabor Grothendieck [ctb], Peter Green [ctb]"
-    .self$year <- 2012
+    .self$year <- 2016
+    .self$mm_RE <- NULL
   }
 )
 
 zmixed$methods(
-  zelig = function(formula, data, ..., weights = NULL, by = NULL) {
-    .self$zelig.call <- match.call(expand.dots = TRUE)
-    .self$model.call <- match.call(expand.dots = TRUE)
-    # .self$call$family <- .self$family.lme4
-    # .self$model.call$family <- paste0(.self$family, '(', .self$link, ')')
-    callSuper(formula = formula, data = data, ..., weights = NULL, by = by)
-    .self$formula.full <- .self$formula # fixed and random effects
-    .self$formula <- formula(.self$zelig.out$z.out[[1]], fixed.only = TRUE) # fixed effects only
-    # lme4:::getFixedFormula(.self$formula.full)
+  set = function(...) {
+    s <- list(...)
+    group <- names(ranef(.self$zelig.out$z.out[[1]]))
+    print(group)
+    set_RE <- intersect(names(s), group)
+    if (length(set_RE) > 0)
+      .self$mm_RE <- as.data.frame(s[set_RE])
+    print(.self$mm_RE)
+    callSuper(...)
   }
 )
 
 zmixed$methods(
   param = function(z.out) {
-    return(list(simparam = arm::sim(z.out, .self$num), simalpha = list(z.out = z.out)))
+    return(list(simparam = z.out))
   }
 )
 
 zmixed$methods(
-  sim = function(num = 1000, group = NULL, group.value = NULL) {
-    .self$group <- group
-    .self$group.value <- group.value
-    callSuper(num = num)
+  qi = function(simparam, mm) {
+    group <- names(ranef(simparam$simparam))
+    
+    if (is.null(.self$mm_RE)) {
+      print("NULL RE")
+      RE <- NULL
+      for (g in group) {
+        y <- sample(simparam$simparam@frame[[g]], 1)
+        # http://stackoverflow.com/questions/30943516/cbind-factor-vector-with-level-names
+        RE <- cbind(RE, levels(y)[y])
+      }
+      print("RE")
+      print(RE)
+      RE <- as.data.frame(RE)
+      names(RE) <- group
+      
+      # mm <- cbind(as.data.frame(mm), Subject = 308)
+      mm <- cbind(as.data.frame(mm), RE)
+      print(mm)
+    } else {
+      mm <- cbind(as.data.frame(mm), .self$mm_RE)
+    }
+    
+    # TODO: check whether group is specified
+    # Now: if no group, select one at random
+    mm_all <- NULL
+    for (i in 1:.self$num)
+      mm_all <- rbind(mm_all, mm)
+    
+    PI <- merTools::predictInterval(merMod = simparam$simparam,
+                                    newdata = mm,
+                                    n.sims = .self$num,
+                                    returnSims = TRUE)
+    
+    PI_all <- merTools::predictInterval(merMod = simparam$simparam,
+                                        newdata = mm_all,
+                                        n.sims = .self$num,
+                                        returnSims = TRUE)
+    
+    ev_all <- as.matrix(t(attr(PI_all, "sim.results")))
+    ev <- as.matrix(apply(ev_all, 1, mean, na.rm = TRUE))
+    pv <- t(attr(PI, "sim.results"))
+    return(list(ev = ev, pv = pv))
   }
 )
+

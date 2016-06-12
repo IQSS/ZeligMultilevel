@@ -13,22 +13,18 @@ zpoissonmixed$methods(
     .self$family <- "poisson"
     .self$link <- "log"
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
-    .self
   }
 )
 
 zpoissonmixed$methods(
-  param = function(z.out) {
-    return(mvrnorm(.self$num, fixef(z.out), vcov(z.out)))
+  zelig = function(formula, data, ..., weights = NULL, by = NULL) {
+    .self$zelig.call <- match.call(expand.dots = TRUE)
+    .self$model.call <- match.call(expand.dots = TRUE)
+    # .self$model.call$family <- .self$family
+    # .self$model.call$family <- paste0(.self$family, '(', .self$link, ')')
+    .self$model.call$family <- quote(poisson("log"))
+    callSuper(formula = formula, data = data, ..., weights = NULL, by = by)
+    .self$formula.full <- .self$formula # fixed and random effects
+    .self$formula <- formula(.self$zelig.out$z.out[[1]], fixed.only = TRUE) # fixed effects only
   }
 )
-
-# zpoissonmixed$methods(
-#   qi = function(simparam, mm) {
-#     ev <- simparam$simparam %*% t(mm)
-#     pv <- as.matrix(rnorm(n = length(ev), mean = ev, sd = simparam$simalpha),
-#                     nrow = length(ev),
-#                     ncol = 1)
-#     return(list(ev = ev, pv = pv))
-#   }
-# )

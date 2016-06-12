@@ -1,4 +1,4 @@
-import(methods, Zelig, lme4, dplyr)
+import(methods, Zelig, dplyr, lme4)
 
 exportPattern("^[[:alpha:]]+")
 exportClasses(
@@ -10,3 +10,4 @@ exportClasses(
 
 importFrom(methods, setRefClass)
 importFrom("MASS", "mvrnorm")
+importFrom("merTools", "predictInterval")
