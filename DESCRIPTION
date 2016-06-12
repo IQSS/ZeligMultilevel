@@ -17,5 +17,6 @@ Collate:
     "model-ls-mixed.R"
     "model-poisson-mixed.R"
     "model-logit-mixed.R"
+    "model-probit-mixed.R"
     "utils.R"
 

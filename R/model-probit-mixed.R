@@ -1,21 +1,21 @@
-zlogitmixed <- setRefClass("Zelig-logitmixed",
+zprobitmixed <- setRefClass("Zelig-probitmixed",
                         fields = list(formula.full = "ANY",
                                       family.lme4 = "ANY"),
-                        contains = c("Zelig-mixed", "Zelig-logit"))
+                        contains = c("Zelig-mixed", "Zelig-probit"))
 
-zlogitmixed$methods(
+zprobitmixed$methods(
   initialize = function() {
     callSuper()
     .self$fn <- quote(lme4::glmer)
     .self$category <- "continous"
     .self$family <- "Binomial"
-    .self$link <- "logit"
-    .self$family.lme4 <- quote(binomial('logit'))
+    .self$link <- "probit"
+    .self$family.lme4 <- quote(binomial('probit'))
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
   }
 )
 
-zlogitmixed$methods(
+zprobitmixed$methods(
   zelig = function(formula, data, ..., weights = NULL, by = NULL) {
     .self$zelig.call <- match.call(expand.dots = TRUE)
     .self$model.call <- match.call(expand.dots = TRUE)

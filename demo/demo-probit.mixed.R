@@ -1,20 +1,26 @@
-# probit.mixed unit test
+# mixed.zelig unit test
 
 library(ZeligMixed)
 
 data(voteincome)
 
-z.out <- zelig(vote ~ education + age + female + tag(1 | state),
-                   data=voteincome, model="probit.mixed")
+##----- lmer
 
-x.low <- setx(z.out, education=quantile(voteincome$education, 0.8))
-x.high <- setx(z.out, education=quantile(voteincome$education, 0.2))
+library(lme4)
+fm1 <- glmer(vote ~ education + age + female + (1 | state),
+             data = voteincome,
+             family = binomial("probit"))
+summary(fm1)
+formula(fm1)
 
-s.out <- sim(z.out, x = x.low, x1 = x.high)
+##----- Zelig
 
-summary(z.out)
-vcov(z.out)
-coef(z.out)
-x.low
-x.high
-
+z5 <- zprobitmixed$new()
+z5
+z5$zelig(vote ~ education + age + female + (1 | state),
+         data = voteincome)
+z5
+z5$setx()
+z5$setx.out$x$mm[[1]]
+z5$sim()
+z5
