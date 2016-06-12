@@ -4,24 +4,23 @@ library(ZeligMixed)
 
 data(voteincome)
 
-z.out <- zelig(
-               vote ~ education + age + female + tag(1 | state),
-               data = voteincome,
-               model="logit.mixed"
-               )
+##----- lmer
 
-##  Setting the explanatory variables at their default values
-##  (mode for factor variables and mean for non-factor variables),
-##  with education set to 80th and 20th percentiles.
+library(lme4)
+fm1 <- glmer(vote ~ education + age + female + (1 | state),
+             data = voteincome,
+             family = binomial("logit"))
+summary(fm1)
+formula(fm1)
 
-x.low <- setx(z.out, education=quantile(voteincome$education, 0.8))
-x.high <- setx(z.out, education=quantile(voteincome$education, 0.2))
+##----- Zelig
 
-##  Simulating draws using the default bootstrap method.
-
-s.out <- sim(z.out, x = x.low, x1 = x.high)
-
-
-#
-summary(z.out)
-vcov(z.out)
+z5 <- zlogitmixed$new()
+z5
+z5$zelig(vote ~ education + age + female + (1 | state),
+         data = voteincome)
+z5
+z5$setx()
+z5$setx.out$x$mm[[1]]
+z5$sim()
+z5

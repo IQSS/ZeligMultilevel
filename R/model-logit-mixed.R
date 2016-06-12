@@ -21,7 +21,7 @@ zlogitmixed$methods(
     .self$model.call <- match.call(expand.dots = TRUE)
     # .self$model.call$family <- .self$family
     # .self$model.call$family <- paste0(.self$family, '(', .self$link, ')')
-    .self$model.call$family <- quote(Gamma("log"))
+    .self$model.call$family <- quote(binomial("logit"))
     callSuper(formula = formula, data = data, ..., weights = NULL, by = by)
     .self$formula.full <- .self$formula # fixed and random effects
     .self$formula <- formula(.self$zelig.out$z.out[[1]], fixed.only = TRUE) # fixed effects only
