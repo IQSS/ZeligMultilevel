@@ -78,6 +78,7 @@ zmixed$methods(
                                         type = .self$sim_type)
     
     ev_all <- as.matrix(t(attr(PI_all, "sim.results")))
+    
     ev <- as.matrix(apply(ev_all, 1, mean, na.rm = TRUE))
     pv <- t(attr(PI, "sim.results"))
     
