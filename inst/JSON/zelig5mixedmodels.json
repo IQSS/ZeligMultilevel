@@ -1,0 +1,69 @@
+{
+  "zelig5mixedmodels": {
+    "gamma-mixed": {
+      "name": [],
+      "description": [],
+      "outcome": {
+        "modelingType": [""]
+      },
+      "explanatory": {
+        "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
+      },
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-gammamixed.html"],
+      "wrapper": ["wrapper"],
+      "tree": ["Zelig-gammamixed", "Zelig-mixed", "Zelig-gamma"]
+    },
+    "logit-mixed": {
+      "name": [],
+      "description": [],
+      "outcome": {
+        "modelingType": [""]
+      },
+      "explanatory": {
+        "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
+      },
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-logitmixed.html"],
+      "wrapper": ["wrapper"],
+      "tree": ["Zelig-logitmixed", "Zelig-mixed", "Zelig-logit"]
+    },
+    "ls-mixed": {
+      "name": ["ls.mixed"],
+      "description": [],
+      "outcome": {
+        "modelingType": [""]
+      },
+      "explanatory": {
+        "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
+      },
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-lsmixed.html"],
+      "wrapper": ["ls.mixed"],
+      "tree": ["Zelig-lsmixed", "Zelig-mixed"]
+    },
+    "poisson-mixed": {
+      "name": ["poisson.mixed"],
+      "description": [],
+      "outcome": {
+        "modelingType": [""]
+      },
+      "explanatory": {
+        "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
+      },
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-poissonmixed.html"],
+      "wrapper": ["wrapper"],
+      "tree": ["Zelig-poissonmixed", "Zelig-mixed"]
+    },
+    "probit-mixed": {
+      "name": [],
+      "description": [],
+      "outcome": {
+        "modelingType": [""]
+      },
+      "explanatory": {
+        "modelingType": ["continuous", "discrete", "nominal", "ordinal", "binary"]
+      },
+      "vignette.url": ["http://docs.zeligproject.org/en/latest/zelig-probitmixed.html"],
+      "wrapper": ["wrapper"],
+      "tree": ["Zelig-probitmixed", "Zelig-mixed", "Zelig-probit"]
+    }
+  }
+}

@@ -19,4 +19,5 @@ Collate:
     "model-logit-mixed.R"
     "model-probit-mixed.R"
     "utils.R"
+    "create-json.R"
 
