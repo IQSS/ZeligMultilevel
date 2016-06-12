@@ -8,7 +8,7 @@ zlogitmixed$methods(
     callSuper()
     .self$fn <- quote(lme4::glmer)
     .self$category <- "continous"
-    .self$family <- "Binomial"
+    .self$family <- "binomial"
     .self$link <- "logit"
     .self$family.lme4 <- quote(binomial('logit'))
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
