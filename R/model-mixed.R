@@ -1,6 +1,7 @@
 zmixed <- setRefClass("Zelig-mixed",
                       fields = list(formula.full = "ANY",# Zelig formula
-                                    mm_RE = "ANY"), # group membership
+                                    mm_RE = "ANY", # group membership
+                                    sim_type = "ANY"), # linear or probability 
                       contains = "Zelig")
 
 zmixed$methods(
@@ -65,16 +66,26 @@ zmixed$methods(
     PI <- merTools::predictInterval(merMod = simparam$simparam,
                                     newdata = mm,
                                     n.sims = .self$num,
-                                    returnSims = TRUE)
+                                    returnSims = TRUE,
+                                    type = .self$sim_type)
+    
+    print(PI)
     
     PI_all <- merTools::predictInterval(merMod = simparam$simparam,
                                         newdata = mm_all,
                                         n.sims = .self$num,
-                                        returnSims = TRUE)
+                                        returnSims = TRUE,
+                                        type = .self$sim_type)
     
     ev_all <- as.matrix(t(attr(PI_all, "sim.results")))
     ev <- as.matrix(apply(ev_all, 1, mean, na.rm = TRUE))
     pv <- t(attr(PI, "sim.results"))
+    
+    if (.self$sim_type == "probability") {
+      ev <- .self$linkinv(ev)
+      pv <- .self$linkinv(pv)
+    }
+    
     return(list(ev = ev, pv = pv))
   }
 )

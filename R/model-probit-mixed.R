@@ -12,6 +12,7 @@ zprobitmixed$methods(
     .self$link <- "probit"
     .self$family.lme4 <- quote(binomial('probit'))
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
+    .self$sim_type <- "probability"
   }
 )
 
