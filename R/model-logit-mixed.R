@@ -12,6 +12,7 @@ zlogitmixed$methods(
     .self$link <- "logit"
     .self$family.lme4 <- quote(binomial('logit'))
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
+    .self$acceptweights <- TRUE
     .self$sim_type <- "probability"
     .self$wrapper <- "logit.mixed"
   }

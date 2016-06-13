@@ -13,6 +13,7 @@ zpoissonmixed$methods(
     .self$family <- "poisson"
     .self$link <- "log"
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
+    .self$acceptweights <- TRUE
     .self$wrapper <- "poisson.mixed"
   }
 )
@@ -24,7 +25,7 @@ zpoissonmixed$methods(
     # .self$model.call$family <- .self$family
     # .self$model.call$family <- paste0(.self$family, '(', .self$link, ')')
     .self$model.call$family <- quote(poisson("log"))
-    callSuper(formula = formula, data = data, ..., weights = NULL, by = by)
+    callSuper(formula = formula, data = data, ..., weights = weights, by = by)
     .self$formula.full <- .self$formula # fixed and random effects
     .self$formula <- formula(.self$zelig.out$z.out[[1]], fixed.only = TRUE) # fixed effects only
   }

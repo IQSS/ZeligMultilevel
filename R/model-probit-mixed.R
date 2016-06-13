@@ -12,6 +12,7 @@ zprobitmixed$methods(
     .self$link <- "probit"
     .self$family.lme4 <- quote(binomial('probit'))
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
+    .self$acceptweights <- TRUE
     .self$sim_type <- "probability"
     .self$wrapper <- "probit.mixed"
   }
@@ -24,7 +25,7 @@ zprobitmixed$methods(
     # .self$model.call$family <- .self$family
     # .self$model.call$family <- paste0(.self$family, '(', .self$link, ')')
     .self$model.call$family <- quote(binomial("probit"))
-    callSuper(formula = formula, data = data, ..., weights = NULL, by = by)
+    callSuper(formula = formula, data = data, ..., weights = weights, by = by)
     .self$formula.full <- .self$formula # fixed and random effects
     .self$formula <- formula(.self$zelig.out$z.out[[1]], fixed.only = TRUE) # fixed effects only
   }
