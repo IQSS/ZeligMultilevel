@@ -7,6 +7,7 @@ zlsmixed$methods(
     .self$name <- "ls.mixed"
     .self$fn <- quote(lme4::lmer)
     .self$category <- "continuous"
+    .self$sim_type <- "linear"
     .self$wrapper <- "ls.mixed"
   }
 )
