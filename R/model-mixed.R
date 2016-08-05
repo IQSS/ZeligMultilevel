@@ -81,7 +81,13 @@ zmixed$methods(
     ev <- as.matrix(apply(ev_all, 1, mean, na.rm = TRUE))
     pv <- t(attr(PI, "sim.results"))
     
-    if (.self$sim_type == "probability") {
+    if (.self$family == "binomial") {
+      print("binomial")
+      ev <- .self$linkinv(ev)
+      pv <- .self$linkinv(pv)
+      pv <- rbinom(.self$num, 1, mean(pv))
+      levels(pv) <- c(0, 1)
+    } else {
       ev <- .self$linkinv(ev)
       pv <- .self$linkinv(pv)
     }
