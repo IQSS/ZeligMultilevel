@@ -22,7 +22,6 @@ zmixed$methods(
     set.RE <- intersect(names(s), group)
     if (length(set_RE) > 0)
       .self$mm.RE <- as.data.frame(s[set.RE])
-    print(.self$mm.RE)
     callSuper(...)
   }
 )
@@ -35,8 +34,10 @@ zmixed$methods(
 
 zmixed$methods(
   qi = function(simparam, mm) {
+    ## Get the grouping variables from the estimated model
     group <- names(ranef(simparam$simparam))
     
+    ## If no group is specified, take one at random
     if (is.null(.self$mm.RE)) {
       print("NULL RE")
       RE <- NULL
@@ -49,10 +50,9 @@ zmixed$methods(
       print(RE)
       RE <- as.data.frame(RE)
       names(RE) <- group
-      
       mm <- cbind(as.data.frame(mm), RE)
       print(mm)
-    } else {
+    } else { ## If a group is specified, make sure the information is passed to the model matrix
       mm <- cbind(as.data.frame(mm), .self$mm.RE)
     }
     
@@ -67,8 +67,6 @@ zmixed$methods(
                                     n.sims = .self$num,
                                     returnSims = TRUE,
                                     type = .self$simtype)
-    
-    # print(PI)
     
     PI.all <- merTools::predictInterval(merMod = simparam$simparam,
                                         newdata = mm.all,
