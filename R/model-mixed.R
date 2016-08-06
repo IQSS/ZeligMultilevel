@@ -70,13 +70,13 @@ zmixed$methods(
     
     # print(PI)
     
-    PI_all <- merTools::predictInterval(merMod = simparam$simparam,
+    PI.all <- merTools::predictInterval(merMod = simparam$simparam,
                                         newdata = mm.all,
                                         n.sims = .self$num,
                                         returnSims = TRUE,
-                                        type = .self$sim_type)
+                                        type = .self$simtype)
     
-    ev_all <- as.matrix(t(attr(PI_all, "sim.results")))
+    ev_all <- as.matrix(t(attr(PI.all, "sim.results")))
     
     ev <- as.matrix(apply(ev_all, 1, mean, na.rm = TRUE))
     pv <- t(attr(PI, "sim.results"))
