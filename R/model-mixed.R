@@ -20,7 +20,7 @@ zmixed$methods(
     group <- names(ranef(.self$zelig.out$z.out[[1]]))
     print(group)
     set.RE <- intersect(names(s), group)
-    if (length(set_RE) > 0)
+    if (length(set.RE) > 0)
       .self$mm.RE <- as.data.frame(s[set.RE])
     callSuper(...)
   }
@@ -37,21 +37,21 @@ zmixed$methods(
     ## Get the grouping variables from the estimated model
     group <- names(ranef(simparam$simparam))
     
-    ## If no group is specified, take one at random
-    if (is.null(.self$mm.RE)) {
-      print("NULL RE")
+    get.random.group.mm <- function() {
       RE <- NULL
       for (g in group) {
         y <- sample(simparam$simparam@frame[[g]], 1)
         # http://stackoverflow.com/questions/30943516/cbind-factor-vector-with-level-names
         RE <- cbind(RE, levels(y)[y])
       }
-      print("RE")
-      print(RE)
       RE <- as.data.frame(RE)
       names(RE) <- group
-      mm <- cbind(as.data.frame(mm), RE)
-      print(mm)
+      return(RE)
+    }
+    
+    ## If no group is specified, take one at random
+    if (is.null(.self$mm.RE)) {
+      mm <- cbind(as.data.frame(mm), get.random.group.mm())
     } else { ## If a group is specified, make sure the information is passed to the model matrix
       mm <- cbind(as.data.frame(mm), .self$mm.RE)
     }
@@ -59,8 +59,9 @@ zmixed$methods(
     # TODO: check whether group is specified
     # Now: if no group, select one at random
     mm.all <- NULL
-    for (i in 1:.self$num)
+    for (i in 1:.self$num) {
       mm.all <- rbind(mm.all, mm)
+    }
     
     PI <- merTools::predictInterval(merMod = simparam$simparam,
                                     newdata = mm,
@@ -74,9 +75,9 @@ zmixed$methods(
                                         returnSims = TRUE,
                                         type = .self$simtype)
     
-    ev_all <- as.matrix(t(attr(PI.all, "sim.results")))
+    ev.all <- as.matrix(t(attr(PI.all, "sim.results")))
     
-    ev <- as.matrix(apply(ev_all, 1, mean, na.rm = TRUE))
+    ev <- as.matrix(apply(ev.all, 1, mean, na.rm = TRUE))
     pv <- t(attr(PI, "sim.results"))
     
     if (.self$family == "binomial") {
