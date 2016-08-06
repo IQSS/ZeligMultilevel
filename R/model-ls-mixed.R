@@ -8,7 +8,7 @@ zlsmixed$methods(
     .self$fn <- quote(lme4::lmer)
     .self$category <- "continuous"
     .self$acceptweights <- TRUE
-    .self$sim_type <- "linear"
+    .self$simtype <- "linear"
     .self$wrapper <- "ls.mixed"
   }
 )

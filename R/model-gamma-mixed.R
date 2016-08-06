@@ -15,7 +15,7 @@ zgammamixed$methods(
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
     .self$acceptweights <- TRUE
     .self$wrapper <- "gamma.mixed"
-    .self$sim_type <- "probability"
+    .self$simtype <- "probability"
   }
 )
 

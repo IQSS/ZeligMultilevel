@@ -1,7 +1,7 @@
 zmixed <- setRefClass("Zelig-mixed",
                       fields = list(formula.full = "ANY",# Zelig formula
-                                    mm_RE = "ANY", # group membership
-                                    sim_type = "ANY"), # linear or probability 
+                                    mm.RE = "ANY", # group membership
+                                    simtype = "ANY"), # linear or probability 
                       contains = "Zelig")
 
 zmixed$methods(
@@ -10,7 +10,7 @@ zmixed$methods(
     .self$fn <- quote(lme4::lmer)
     .self$packageauthors <- "Douglas Bates [aut], Martin Maechler [aut], Ben Bolker [aut, cre], Steven Walker [aut], Rune Haubo Bojesen Christensen [ctb], Henrik Singmann [ctb], Bin Dai [ctb], Gabor Grothendieck [ctb], Peter Green [ctb]"
     .self$year <- 2016
-    .self$mm_RE <- NULL
+    .self$mm.RE <- NULL
   }
 )
 
@@ -19,10 +19,10 @@ zmixed$methods(
     s <- list(...)
     group <- names(ranef(.self$zelig.out$z.out[[1]]))
     print(group)
-    set_RE <- intersect(names(s), group)
+    set.RE <- intersect(names(s), group)
     if (length(set_RE) > 0)
-      .self$mm_RE <- as.data.frame(s[set_RE])
-    print(.self$mm_RE)
+      .self$mm.RE <- as.data.frame(s[set.RE])
+    print(.self$mm.RE)
     callSuper(...)
   }
 )
@@ -37,7 +37,7 @@ zmixed$methods(
   qi = function(simparam, mm) {
     group <- names(ranef(simparam$simparam))
     
-    if (is.null(.self$mm_RE)) {
+    if (is.null(.self$mm.RE)) {
       print("NULL RE")
       RE <- NULL
       for (g in group) {
@@ -53,25 +53,25 @@ zmixed$methods(
       mm <- cbind(as.data.frame(mm), RE)
       print(mm)
     } else {
-      mm <- cbind(as.data.frame(mm), .self$mm_RE)
+      mm <- cbind(as.data.frame(mm), .self$mm.RE)
     }
     
     # TODO: check whether group is specified
     # Now: if no group, select one at random
-    mm_all <- NULL
+    mm.all <- NULL
     for (i in 1:.self$num)
-      mm_all <- rbind(mm_all, mm)
+      mm.all <- rbind(mm.all, mm)
     
     PI <- merTools::predictInterval(merMod = simparam$simparam,
                                     newdata = mm,
                                     n.sims = .self$num,
                                     returnSims = TRUE,
-                                    type = .self$sim_type)
+                                    type = .self$simtype)
     
     # print(PI)
     
     PI_all <- merTools::predictInterval(merMod = simparam$simparam,
-                                        newdata = mm_all,
+                                        newdata = mm.all,
                                         n.sims = .self$num,
                                         returnSims = TRUE,
                                         type = .self$sim_type)
