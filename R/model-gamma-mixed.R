@@ -6,6 +6,7 @@ zgammamixed <- setRefClass("Zelig-gammamixed",
 zgammamixed$methods(
   initialize = function() {
     callSuper()
+    .self$name <- "gamma.mixed"
     .self$fn <- quote(lme4::glmer)
     .self$category <- "continous"
     .self$family <- "Gamma"

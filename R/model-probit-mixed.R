@@ -6,6 +6,7 @@ zprobitmixed <- setRefClass("Zelig-probitmixed",
 zprobitmixed$methods(
   initialize = function() {
     callSuper()
+    .self$name <- "probit.mixed"
     .self$fn <- quote(lme4::glmer)
     .self$category <- "continous"
     .self$family <- "binomial"

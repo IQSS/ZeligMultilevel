@@ -6,6 +6,7 @@ zlogitmixed <- setRefClass("Zelig-logitmixed",
 zlogitmixed$methods(
   initialize = function() {
     callSuper()
+    .self$name <- "logit.mixed"
     .self$fn <- quote(lme4::glmer)
     .self$category <- "continous"
     .self$family <- "binomial"
