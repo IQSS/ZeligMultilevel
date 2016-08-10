@@ -1,5 +1,5 @@
 # gamma.mixed unit test
-library(ZeligMixed)
+library(ZeligMultilevel)
 
 data(coalition2)
 
