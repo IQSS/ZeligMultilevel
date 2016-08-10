@@ -10,7 +10,8 @@ Date: 2016-06-12
 Depends:
     Zelig,
     dplyr,
-    lme4
+    lme4,
+    merTools
 Collate:
     "model-mixed.R"
     "model-gamma-mixed.R"
