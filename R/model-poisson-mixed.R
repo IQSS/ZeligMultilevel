@@ -14,6 +14,7 @@ zpoissonmixed$methods(
     .self$link <- "log"
     .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
     .self$acceptweights <- TRUE
+    .self$simtype <- "probability"
     .self$wrapper <- "poisson.mixed"
   }
 )
