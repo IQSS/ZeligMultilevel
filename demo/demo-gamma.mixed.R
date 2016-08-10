@@ -21,3 +21,4 @@ z5$setx()
 z5$setx.out$x$mm[[1]]
 z5$sim()
 z5
+plot(z5)
