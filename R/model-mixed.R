@@ -89,9 +89,9 @@ zmixed$methods(
     ev.all <- as.matrix(t(attr(PI.all, "sim.results")))
     
     ev <- as.matrix(apply(ev.all, 1, mean, na.rm = TRUE))
-    pv <- t(attr(PI, "sim.results"))
+    # pv <- t(attr(PI, "sim.results"))
     
-    if (.self$family == "binomial") {
+    if (.self$name %in% c("logit.mixed", "probit.mixed")) {
       print("binomial")
       ev <- .self$linkinv(ev)
       # pv <- .self$linkinv(pv)
@@ -100,9 +100,10 @@ zmixed$methods(
       for (j in 1:ncol(ev))
         pv[, j] <- rbinom(length(ev[, j]), 1, prob = ev[, j])
       levels(pv) <- c(0, 1)
-    } else {
-      ev <- .self$linkinv(ev)
-      pv <- .self$linkinv(pv)
+    } else if (.self$name %in% c("ls.mixed")) {
+      # ev <- .self$linkinv(ev)
+      # pv <- .self$linkinv(pv)
+      pv <- as.matrix(rnorm(n=length(ev), mean=ev, sd=sd(ev)), nrow=length(ev), ncol=1)
     }
     print("##----- ev")
     print(dim(ev))

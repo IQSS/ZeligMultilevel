@@ -20,6 +20,6 @@ z5$mm.RE
 # z5$setx()
 z5
 z5$setx.out$x$mm[[1]]
-z5$sim(num = 100)
+z5$sim(num = 500)
 z5
 plot(z5)
