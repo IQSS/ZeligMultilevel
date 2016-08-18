@@ -1,6 +1,6 @@
 # mixed.zelig unit test
 
-library(ZeligMixed)
+library(ZeligMultilevel)
 
 data(voteincome)
 dim(voteincome)

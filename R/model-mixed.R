@@ -50,9 +50,17 @@ zmixed$methods(
       return(RE)
     }
     
+    # ## If no group is specified, take one at random
+    # if (is.null(.self$mm.RE)) {
+    #   mm <- cbind(as.data.frame(mm), get.random.group.mm())
+    # } else { ## If a group is specified, make sure the information is passed to the model matrix
+    #   mm <- cbind(as.data.frame(mm), .self$mm.RE)
+    # }
+    
     ## If no group is specified, take one at random
     if (is.null(.self$mm.RE)) {
-      mm <- cbind(as.data.frame(mm), get.random.group.mm())
+      # mm <- cbind(as.data.frame(mm), get.random.group.mm())
+      mm <- mm
     } else { ## If a group is specified, make sure the information is passed to the model matrix
       mm <- cbind(as.data.frame(mm), .self$mm.RE)
     }
@@ -91,7 +99,12 @@ zmixed$methods(
       ev <- .self$linkinv(ev)
       pv <- .self$linkinv(pv)
     }
-    
+    print("##----- ev")
+    print(dim(ev))
+    print(ev)
+    print("##----- pv")
+    print(dim(pv))
+    print(pv)
     return(list(ev = ev, pv = pv))
   }
 )
