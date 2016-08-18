@@ -94,8 +94,11 @@ zmixed$methods(
     if (.self$family == "binomial") {
       print("binomial")
       ev <- .self$linkinv(ev)
-      pv <- .self$linkinv(pv)
-      pv <- rbinom(.self$num, 1, mean(pv))
+      # pv <- .self$linkinv(pv)
+      # pv <- rbinom(.self$num, 1, mean(pv))
+      pv <- matrix(nrow = nrow(ev), ncol = ncol(ev))
+      for (j in 1:ncol(ev))
+        pv[, j] <- rbinom(length(ev[, j]), 1, prob = ev[, j])
       levels(pv) <- c(0, 1)
     } else {
       ev <- .self$linkinv(ev)
