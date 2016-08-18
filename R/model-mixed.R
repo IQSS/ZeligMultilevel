@@ -50,26 +50,28 @@ zmixed$methods(
       return(RE)
     }
     
-    # ## If no group is specified, take one at random
-    # if (is.null(.self$mm.RE)) {
-    #   mm <- cbind(as.data.frame(mm), get.random.group.mm())
-    # } else { ## If a group is specified, make sure the information is passed to the model matrix
-    #   mm <- cbind(as.data.frame(mm), .self$mm.RE)
-    # }
+    mm.with.random.group <- function() {
+      return(cbind(as.data.frame(mm), get.random.group.mm()))
+    }
     
     ## If no group is specified, take one at random
     if (is.null(.self$mm.RE)) {
       # mm <- cbind(as.data.frame(mm), get.random.group.mm())
-      mm <- mm
+      mm <- mm.with.random.group()
     } else { ## If a group is specified, make sure the information is passed to the model matrix
       mm <- cbind(as.data.frame(mm), .self$mm.RE)
     }
     
-    # TODO: check whether group is specified
-    # Now: if no group, select one at random
+    ## If no group is specified, take one at random
     mm.all <- NULL
-    for (i in 1:.self$num) {
-      mm.all <- rbind(mm.all, mm)
+    if (is.null(.self$mm.RE)) {
+      for (i in 1:.self$num) {
+        mm.all <- rbind(mm.all, mm.with.random.group())
+      }
+    } else {
+      for (i in 1:.self$num) {
+        mm.all <- rbind(mm.all, mm)
+      }
     }
     
     PI <- merTools::predictInterval(merMod = simparam$simparam,
