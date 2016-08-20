@@ -67,6 +67,7 @@ zpoissonmixed$methods(
       matrix(getME(regression, "offset"), dims[["n"]], numSimulations);
     
     eta <- as.matrix(colMeans(linearPredictor, 1))
+    ev <- .self$linkinv(ev)
     theta.local <- matrix(.self$linkinv(eta), nrow = .self$num)
     ev <- theta.local
     pv <- matrix(NA, nrow = nrow(theta.local), ncol = ncol(theta.local))

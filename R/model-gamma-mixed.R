@@ -69,6 +69,7 @@ zgammamixed$methods(
     eta <- as.matrix(colMeans(linearPredictor, 1))
     theta <- matrix(1 / eta, nrow = .self$num)
     ev <- theta
+    ev <- .self$linkinv(ev)
     pv <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
     for (ii in 1:nrow(ev))
       pv[ii, ] <- rgamma(ncol(ev), shape = ev, scale = sigma(regression))
