@@ -19,6 +19,6 @@ z5$zelig(duration ~ invest + fract + polar + numst2 + crisis + (1 | country), co
 z5
 z5$setx()
 z5$setx.out$x$mm[[1]]
-z5$sim()
+z5$sim(300)
 z5
 plot(z5)

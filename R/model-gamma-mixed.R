@@ -31,3 +31,48 @@ zgammamixed$methods(
     .self$formula <- formula(.self$zelig.out$z.out[[1]], fixed.only = TRUE) # fixed effects only
   }
 )
+
+zgammamixed$methods(
+  qi = function(simparam, mm) {
+    regression <- simparam$simalpha;
+    sims <- simparam$simparam;
+    numSimulations <- dim(sims@fixef)[1];
+    devcomp <- getME(regression, "devcomp");
+    dims <- devcomp$dims;
+    
+    numRanef  <- dims[["q"]];
+    numLevels <- dims[["reTrms"]];
+    
+    simulatedRanef <- matrix(0, numRanef, numSimulations);
+    
+    index <- 0;
+    for (i in 1:length(sims@ranef)) {
+      levelSims <- sims@ranef[[i]];
+      numCoefficientsPerLevel <- dim(levelSims)[2];
+      numGroupsPerLevel <- dim(levelSims)[3];
+      for (j in 1:numCoefficientsPerLevel) {
+        ranefRange <- index + 1:numGroupsPerLevel;
+        index <- index + numGroupsPerLevel;
+        
+        simulatedRanef[ranefRange,] <- t(levelSims[,j,]);
+      }
+    }
+    
+    X <- getME(regression, "X");
+    X <- matrix(rep(mm, length(X)), nrow(X), ncol(X), byrow = TRUE)
+    
+    Zt <- getME(regression, "Zt");
+    
+    linearPredictor <- as.matrix(tcrossprod(as.matrix(X), sims@fixef) + crossprod(as.matrix(Zt), simulatedRanef)) +
+      matrix(getME(regression, "offset"), dims[["n"]], numSimulations);
+    
+    eta <- as.matrix(colMeans(linearPredictor, 1))
+    theta <- matrix(1 / eta, nrow = .self$num)
+    ev <- theta
+    pv <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
+    for (ii in 1:nrow(ev))
+      pv[ii, ] <- rgamma(ncol(ev), shape = ev, scale = sigma(regression))
+    
+    return(list(ev = ev, pv = pv))
+  }
+)
