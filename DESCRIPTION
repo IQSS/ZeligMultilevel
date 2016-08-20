@@ -8,10 +8,10 @@ Version: 0.7-3
 URL: http://projects.iq.harvard.edu/zelig
 Date: 2016-06-12
 Depends:
+    arm,
     Zelig,
     dplyr,
-    lme4,
-    merTools
+    lme4
 Collate:
     "model-mixed.R"
     "model-gamma-mixed.R"
