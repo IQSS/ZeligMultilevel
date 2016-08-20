@@ -13,8 +13,8 @@ formula(fm1)
 z5 <- zlsmixed$new()
 z5
 z5$zelig(Reaction ~ Days + (Days | Subject), sleepstudy)
-z5$setx(Days = 1)
+z5$setx(Days = 8)
 z5
-z5$sim(num = 3)
+z5$sim(num = 300)
 z5
 plot(z5)

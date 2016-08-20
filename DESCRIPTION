@@ -19,6 +19,5 @@ Collate:
     "model-poisson-mixed.R"
     "model-logit-mixed.R"
     "model-probit-mixed.R"
-    "utils.R"
     "create-json.R"
 
