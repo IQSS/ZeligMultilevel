@@ -1,7 +1,7 @@
 zlogitmixed <- setRefClass("Zelig-logitmixed",
-                        fields = list(formula.full = "ANY",
-                                      family.lme4 = "ANY"),
-                        contains = c("Zelig-mixed", "Zelig-logit"))
+                           fields = list(formula.full = "ANY",
+                                         family.lme4 = "ANY"),
+                           contains = c("Zelig-mixed", "Zelig-logit"))
 
 zlogitmixed$methods(
   initialize = function() {
@@ -29,5 +29,50 @@ zlogitmixed$methods(
     callSuper(formula = formula, data = data, ..., weights = NULL, by = by)
     .self$formula.full <- .self$formula # fixed and random effects
     .self$formula <- formula(.self$zelig.out$z.out[[1]], fixed.only = TRUE) # fixed effects only
+  }
+)
+
+zlogitmixed$methods(
+  qi = function(simparam, mm) {
+    regression <- simparam$simalpha;
+    sims <- simparam$simparam;
+    numSimulations <- dim(sims@fixef)[1];
+    devcomp <- getME(regression, "devcomp");
+    dims <- devcomp$dims;
+    
+    numRanef  <- dims[["q"]];
+    numLevels <- dims[["reTrms"]];
+    
+    simulatedRanef <- matrix(0, numRanef, numSimulations);
+    
+    index <- 0;
+    for (i in 1:length(sims@ranef)) {
+      levelSims <- sims@ranef[[i]];
+      numCoefficientsPerLevel <- dim(levelSims)[2];
+      numGroupsPerLevel <- dim(levelSims)[3];
+      for (j in 1:numCoefficientsPerLevel) {
+        ranefRange <- index + 1:numGroupsPerLevel;
+        index <- index + numGroupsPerLevel;
+        
+        simulatedRanef[ranefRange,] <- t(levelSims[,j,]);
+      }
+    }
+    
+    X <- getME(regression, "X");
+    X <- matrix(rep(mm, length(X)), nrow(X), ncol(X), byrow = TRUE)
+    
+    Zt <- getME(regression, "Zt");
+    
+    linearPredictor <- as.matrix(tcrossprod(as.matrix(X), sims@fixef) + crossprod(as.matrix(Zt), simulatedRanef)) +
+      matrix(getME(regression, "offset"), dims[["n"]], numSimulations);
+    
+    ev <- as.matrix(colMeans(linearPredictor, 1))
+    ev <- .self$linkinv(ev)
+    pv <- matrix(nrow = nrow(ev), ncol = ncol(ev))
+    for (j in 1:ncol(ev))
+      pv[, j] <- rbinom(length(ev[, j]), 1, prob = ev[, j])
+    levels(pv) <- c(0, 1)
+    
+    return(list(ev = ev, pv = pv))
   }
 )

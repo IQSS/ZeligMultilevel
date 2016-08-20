@@ -42,6 +42,8 @@ rbinom(10, 1, sample(sim, 1))
 
 ##----- Zelig
 
+data(voteincome)
+
 z5 <- zlogitmixed$new()
 z5
 z5$zelig(vote ~ education + age + female + (1 | state),
@@ -50,6 +52,8 @@ z5
 
 z5$setx()
 z5$sim(num = 5)
+z5
+plot(z5)
 
 z5$setx(state = "AR")
 z5$mm.RE
