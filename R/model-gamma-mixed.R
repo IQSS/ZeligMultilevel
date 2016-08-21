@@ -63,16 +63,26 @@ zgammamixed$methods(
     
     Zt <- getME(regression, "Zt");
     
-    linearPredictor <- as.matrix(tcrossprod(as.matrix(X), sims@fixef) + crossprod(as.matrix(Zt), simulatedRanef)) +
-      matrix(getME(regression, "offset"), dims[["n"]], numSimulations);
+    ## Linear predictor
+    x.beta <- as.matrix(tcrossprod(as.matrix(X), sims@fixef))
+    z.b <- crossprod(as.matrix(Zt), simulatedRanef)
+    lp <- x.beta + z.b + matrix(getME(regression, "offset"), dims[["n"]], numSimulations);
     
-    eta <- as.matrix(colMeans(linearPredictor, 1))
+    ## FE
+    eta <- as.matrix(colMeans(x.beta, 1))
     theta <- matrix(1 / eta, nrow = .self$num)
     ev <- theta
     ev <- .self$linkinv(ev)
+    
+    ## FE + RE
+    eta <- as.matrix(colMeans(lp, 1))
+    theta <- matrix(1 / eta, nrow = .self$num)
+    evm <- theta
+    evm <- .self$linkinv(evm)
+    
     pv <- matrix(NA, nrow = nrow(theta), ncol = ncol(theta))
-    for (ii in 1:nrow(ev))
-      pv[ii, ] <- rgamma(ncol(ev), shape = ev, scale = sigma(regression))
+    for (ii in 1:nrow(evm))
+      pv[ii, ] <- rgamma(ncol(evm), shape = evm, scale = sigma(regression))
     
     return(list(ev = ev, pv = pv))
   }

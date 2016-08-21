@@ -53,12 +53,17 @@ zlsmixed$methods(
     X <- matrix(rep(mm, length(X)), nrow(X), ncol(X), byrow = TRUE)
     
     Zt <- getME(regression, "Zt");
-
-    linearPredictor <- as.matrix(tcrossprod(as.matrix(X), sims@fixef) + crossprod(as.matrix(Zt), simulatedRanef)) +
-      matrix(getME(regression, "offset"), dims[["n"]], numSimulations);
     
-    ev <- as.matrix(colMeans(linearPredictor, 1))
-    pv <- as.matrix(rnorm(n = length(ev), mean = ev, sd = sims@sigma), nrow = length(ev), ncol = 1)
+    ## Linear predictor
+    x.beta <- as.matrix(tcrossprod(as.matrix(X), sims@fixef))
+    z.b <- crossprod(as.matrix(Zt), simulatedRanef)
+    lp <- x.beta + z.b + matrix(getME(regression, "offset"), dims[["n"]], numSimulations);
+    
+    ## FE
+    ev <- as.matrix(colMeans(x.beta, 1))
+    ## FE + RE
+    lpm <- as.matrix(colMeans(lp, 1))
+    pv <- as.matrix(rnorm(n = length(lpm), mean = lpm, sd = sims@sigma), nrow = length(lpm), ncol = 1)
     
     return(list(ev = ev, pv = pv))
   }

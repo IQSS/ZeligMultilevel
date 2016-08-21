@@ -63,13 +63,29 @@ zpoissonmixed$methods(
     
     Zt <- getME(regression, "Zt");
     
-    linearPredictor <- as.matrix(tcrossprod(as.matrix(X), sims@fixef) + crossprod(as.matrix(Zt), simulatedRanef)) +
-      matrix(getME(regression, "offset"), dims[["n"]], numSimulations);
+    ## Linear predictor
+    x.beta <- as.matrix(tcrossprod(as.matrix(X), sims@fixef))
+    z.b <- crossprod(as.matrix(Zt), simulatedRanef)
+    lp <- x.beta + z.b + matrix(getME(regression, "offset"), dims[["n"]], numSimulations);
     
-    eta <- as.matrix(colMeans(linearPredictor, 1))
-    ev <- .self$linkinv(ev)
+    
+    # eta <- simparam %*% t(mm)
+    # theta.local <- matrix(.self$linkinv(eta), nrow = nrow(simparam))
+    # ev <- theta.local
+    # pv <- matrix(NA, nrow = nrow(theta.local), ncol = ncol(theta.local))
+    # for (i in 1:ncol(theta.local))
+    #   pv[, i] <- rpois(nrow(theta.local), lambda = theta.local[, i])
+    # 
+    
+    ## FE only
+    eta <- as.matrix(colMeans(x.beta, 1))
     theta.local <- matrix(.self$linkinv(eta), nrow = .self$num)
     ev <- theta.local
+    
+    ## FE + RE
+    eta <- as.matrix(colMeans(lp, 1))
+    theta.local <- matrix(.self$linkinv(eta), nrow = .self$num)
+    
     pv <- matrix(NA, nrow = nrow(theta.local), ncol = ncol(theta.local))
     for (i in 1:ncol(theta.local))
       pv[, i] <- rpois(nrow(theta.local), lambda = theta.local[, i])

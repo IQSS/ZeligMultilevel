@@ -51,7 +51,7 @@ z5$zelig(vote ~ education + age + female + (1 | state),
 z5
 
 z5$setx()
-z5$sim(num = 50)
+z5$sim(num = 500)
 z5
 plot(z5)
 

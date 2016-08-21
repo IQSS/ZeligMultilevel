@@ -63,14 +63,21 @@ zprobitmixed$methods(
     
     Zt <- getME(regression, "Zt");
     
-    linearPredictor <- as.matrix(tcrossprod(as.matrix(X), sims@fixef) + crossprod(as.matrix(Zt), simulatedRanef)) +
-      matrix(getME(regression, "offset"), dims[["n"]], numSimulations);
+    ## Linear predictor
+    x.beta <- as.matrix(tcrossprod(as.matrix(X), sims@fixef))
+    z.b <- crossprod(as.matrix(Zt), simulatedRanef)
+    lp <- x.beta + z.b + matrix(getME(regression, "offset"), dims[["n"]], numSimulations);
     
-    ev <- as.matrix(colMeans(linearPredictor, 1))
+    ## FE
+    ev <- as.matrix(colMeans(x.beta, 1))
     ev <- .self$linkinv(ev)
-    pv <- matrix(nrow = nrow(ev), ncol = ncol(ev))
-    for (j in 1:ncol(ev))
-      pv[, j] <- rbinom(length(ev[, j]), 1, prob = ev[, j])
+    
+    ## FE + RE
+    lpm <- as.matrix(colMeans(lp, 1))
+    lpm <- .self$linkinv(lpm)
+    pv <- matrix(nrow = nrow(lpm), ncol = ncol(lpm))
+    for (j in 1:ncol(lpm))
+      pv[, j] <- rbinom(length(lpm[, j]), 1, prob = lpm[, j])
     levels(pv) <- c(0, 1)
     
     return(list(ev = ev, pv = pv))
