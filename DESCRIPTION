@@ -5,7 +5,7 @@ Title: Multilevel Regressions for Zelig
 Author: Christine Choirat
 Description: Add-on package for Zelig. Enables the use of multilevel (mixed-effect) models.
 Version: 0.7-3
-URL: http://projects.iq.harvard.edu/zelig
+URL: http://zeligproject.org/, https://github.com/IQSS/ZeligMultilevel
 Date: 2016-08-21
 Depends:
     arm,
