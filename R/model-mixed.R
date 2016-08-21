@@ -16,6 +16,7 @@ zmixed$methods(
     .self$modelauthors <- "TBD" 
     .self$year <- 2016
     .self$mm.RE <- NULL
+    .self$acceptweights <- TRUE
   }
 )
 
