@@ -6,7 +6,7 @@ Author: Christine Choirat
 Description: Add-on package for Zelig. Enables the use of multilevel (mixed-effect) models.
 Version: 0.7-3
 URL: http://projects.iq.harvard.edu/zelig
-Date: 2016-06-12
+Date: 2016-08-21
 Depends:
     arm,
     Zelig,
