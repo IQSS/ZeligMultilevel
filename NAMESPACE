@@ -1,4 +1,4 @@
-import(methods, Zelig, dplyr, lme4)
+import(methods, dplyr, lme4, Zelig)
 
 exportPattern("^[[:alpha:]]+")
 exportClasses(
