@@ -22,3 +22,34 @@ zlsmixed$methods(
     .self$formula <- formula(.self$zelig.out$z.out[[1]], fixed.only = TRUE) # fixed effects only
   }
 )
+
+zlsmixed$methods(
+  set = function(...) {
+    "Setting Explanatory Variable Values"
+    new.data <- as.data.frame(c(as.list(environment()), list(...)))
+    print(new.data)
+    if (length(new.data) == 0) # take the average
+      update <- .self$data %>%
+      group_by_(.self$by) %>%
+      do(mm = merTools::draw(.self$zelig.out$z.out[[1]], type = "average"))
+    else
+      update <- .self$data %>%
+      group_by_(.self$by) %>%
+      do(mm = new.data)
+    return(update)
+  }
+)
+
+zlsmixed$methods(
+  setx = function(...) {
+    .self$bsetx <- TRUE
+    .self$setx.out$x  <- .self$set(...)
+  }
+)
+
+zlsmixed$methods(
+  setx1 = function(...) {
+    .self$bsetx1 <- TRUE
+    .self$setx.out$x1 <- .self$set(...)
+  }
+)

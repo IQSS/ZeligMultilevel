@@ -62,3 +62,5 @@ z5$simx1
 z5$simparam$simparam
 plot(z5)
 z5$linkinv(z5$sim.out$x$ev[[1]])
+
+z5$getqi("fd")
