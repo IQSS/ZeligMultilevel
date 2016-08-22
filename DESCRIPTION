@@ -2,7 +2,7 @@ Package: ZeligMultilevel
 Maintainer: James Honaker <zelig-zee@iq.harvard.edu>
 License: GPL (>=2)
 Title: Multilevel Regressions for Zelig
-Author: Christine Choirat
+Author: TBD
 Description: Add-on package for Zelig. Enables the use of multilevel (mixed-effect) models.
 Version: 0.7-3
 URL: http://projects.iq.harvard.edu/zelig
