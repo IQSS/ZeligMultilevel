@@ -106,12 +106,12 @@ zmixed$methods(
       # pv <- .self$linkinv(pv)
       pv <- as.matrix(rnorm(n=length(ev), mean=ev, sd=sd(ev)), nrow=length(ev), ncol=1)
     }
-    print("##----- ev")
-    print(dim(ev))
-    print(ev)
-    print("##----- pv")
-    print(dim(pv))
-    print(pv)
+    # print("##----- ev")
+    # print(dim(ev))
+    # print(ev)
+    # print("##----- pv")
+    # print(dim(pv))
+    # print(pv)
     return(list(ev = ev, pv = pv))
   }
 )
