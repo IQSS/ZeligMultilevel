@@ -1,2 +1,4 @@
 tests/*.pdf
 man/.*
+.Rproj*
+.Rhistory
