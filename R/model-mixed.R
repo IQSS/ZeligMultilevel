@@ -22,6 +22,7 @@ zmixed$methods(
 
 zmixed$methods(
   set = function(...) {
+    .self$mm.RE <- NULL # reset group membership
     s <- list(...)
     group <- names(ranef(.self$zelig.out$z.out[[1]]))
     print(group)

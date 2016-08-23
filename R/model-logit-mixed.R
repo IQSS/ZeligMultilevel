@@ -36,6 +36,16 @@ zlogitmixed$methods(
   qi = function(simparam, mm) {
     regression <- simparam$simalpha;
     sims <- simparam$simparam;
+    
+    sims.tmp <- sims
+    ## Check if group memberships are specified
+    if (!is.null(.self$mm.RE)){
+      for (group in names(.self$mm.RE)) {
+        sims@ranef[[group]][, , ] <- 0
+        sims@ranef[[group]][, unlist(.self$mm.RE[group]), ] <- sims.tmp@ranef[[group]][, unlist(.self$mm.RE[group]), ]
+      }
+    }
+    
     numSimulations <- dim(sims@fixef)[1];
     devcomp <- getME(regression, "devcomp");
     dims <- devcomp$dims;
