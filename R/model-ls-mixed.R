@@ -26,16 +26,32 @@ zlsmixed$methods(
 zlsmixed$methods(
   set = function(...) {
     "Setting Explanatory Variable Values"
-    new.data <- as.data.frame(c(as.list(environment()), list(...)))
-    print(new.data)
-    if (length(new.data) == 0) # take the average
-      update <- .self$data %>%
+    s <- as.data.frame(c(as.list(environment()), list(...)))
+    
+    f <- function(z.out) {
+      mm <- merTools::draw(z.out, type = "average")
+      variables <- names(.self$data)
+      variables.to.set <- intersect(names(s), variables)
+      print(variables.to.set)
+      if (length(variables.to.set) > 0)
+        for (i in seq(length(variables.to.set)))
+          mm[[variables.to.set[i]]] <- s[names(s) == variables.to.set[i]][[1]]
+      return(as.data.frame(mm))
+    }
+  
+    # avg.data <<- .self$zelig.out %>% 
+    #   do(avg = merTools::draw(.$z.out, type = "average"))
+    
+    mm <- merTools::draw(.self$zelig.out$z.out[[1]], type = "average")  # TODO: fix, not only [[1]], see above
+    variables <- names(.self$data)
+    variables.to.set <- intersect(names(s), variables)
+    print(variables.to.set)
+    if (length(variables.to.set) > 0)
+      for (i in seq(length(variables.to.set)))
+        mm[[variables.to.set[i]]] <- s[names(s) == variables.to.set[i]][[1]]
+    update <- .self$data %>%
       group_by_(.self$by) %>%
-      do(mm = merTools::draw(.self$zelig.out$z.out[[1]], type = "average"))
-    else
-      update <- .self$data %>%
-      group_by_(.self$by) %>%
-      do(mm = new.data)
+      do(mm = as.data.frame(mm))
     return(update)
   }
 )
@@ -51,5 +67,21 @@ zlsmixed$methods(
   setx1 = function(...) {
     .self$bsetx1 <- TRUE
     .self$setx.out$x1 <- .self$set(...)
+  }
+)
+
+## TODO: Add setrange* functions
+
+zlsmixed$methods(
+  qi = function(simparam, mm) {
+    print(simparam$simparam)
+    print(mm)
+    PI <- merTools::predictInterval(merMod = simparam$simparam,
+                                    newdata = mm,
+                                    n.sims = .self$num,
+                                    returnSims = TRUE,
+                                    type = .self$simtype)
+    ev <- t(attr(PI, "sim.results"))
+    return(list(ev = ev, pv = ev))
   }
 )
