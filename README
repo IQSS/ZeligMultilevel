@@ -1,5 +1,3 @@
 Mixed (Multi-level) Zelig Models
 ================================
-This package contains several simple multi-level Zelig models.
-Currently, it seems that several things are implemented incorrectly,
-though the code is error-free
+This package contains several simple multi-level Zelig models.  It leverages arm::sim.  The dev branch relies on merTools instead.
