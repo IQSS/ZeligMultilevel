@@ -1,7 +1,7 @@
 {
   "zelig5mixedmodels": {
     "gammamixed": {
-      "name": [],
+      "name": ["gamma.mixed"],
       "description": [],
       "outcome": {
         "modelingType": [""]
@@ -14,7 +14,7 @@
       "tree": ["Zelig-gammamixed", "Zelig-mixed", "Zelig-gamma"]
     },
     "logitmixed": {
-      "name": [],
+      "name": ["logit.mixed"],
       "description": [],
       "outcome": {
         "modelingType": [""]
@@ -53,7 +53,7 @@
       "tree": ["Zelig-poissonmixed", "Zelig-mixed"]
     },
     "probitmixed": {
-      "name": [],
+      "name": ["probit.mixed"],
       "description": [],
       "outcome": {
         "modelingType": [""]
