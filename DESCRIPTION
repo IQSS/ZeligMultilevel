@@ -12,6 +12,7 @@ Depends:
     dplyr,
     Formula,
     lme4,
+    methods,
     Zelig (>= 5.0-10)
 Collate:
     "model-mixed.R"

@@ -9,4 +9,4 @@ exportClasses(
   "Zelig-poissonmixed"
 )
 
-importFrom(methods, setRefClass)
+importFrom("methods", "new")
