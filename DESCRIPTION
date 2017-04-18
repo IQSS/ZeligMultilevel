@@ -4,14 +4,15 @@ License: GPL (>=2)
 Title: Multilevel Regressions for Zelig
 Author: Christine Choirat
 Description: Add-on package for Zelig. Enables the use of multilevel (mixed-effect) models.
-Version: 0.7-4
+Version: 0.7-5
 URL: http://zeligproject.org/, https://github.com/IQSS/ZeligMultilevel
-Date: 2016-08-23
+Date: 2017-04-18
 Depends:
     arm,
-    Zelig (>= 5.0-10),
     dplyr,
-    lme4
+    Formula,
+    lme4,
+    Zelig (>= 5.0-10)
 Collate:
     "model-mixed.R"
     "model-gamma-mixed.R"
@@ -20,4 +21,4 @@ Collate:
     "model-logit-mixed.R"
     "model-probit-mixed.R"
     "create-json.R"
-
+Suggests: testthat

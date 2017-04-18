@@ -5,7 +5,7 @@ zmixed <- setRefClass("Zelig-mixed",
                                     error = "ANY",
                                     formula.full = "ANY",# Zelig formula
                                     mm.RE = "ANY", # group membership
-                                    simtype = "ANY"), # linear or probability 
+                                    simtype = "ANY"), # linear or probability
                       contains = "Zelig")
 
 zmixed$methods(
@@ -13,7 +13,7 @@ zmixed$methods(
     callSuper()
     .self$fn <- quote(lme4::lmer)
     .self$packageauthors <- "Douglas Bates [aut], Martin Maechler [aut], Ben Bolker [aut, cre], Steven Walker [aut], Rune Haubo Bojesen Christensen [ctb], Henrik Singmann [ctb], Bin Dai [ctb], Gabor Grothendieck [ctb], Peter Green [ctb]"
-    .self$modelauthors <- "TBD" 
+    .self$modelauthors <- "TBD"
     .self$year <- 2016
     .self$mm.RE <- NULL
     .self$acceptweights <- TRUE

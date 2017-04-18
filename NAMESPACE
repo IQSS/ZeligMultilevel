@@ -1,4 +1,5 @@
-import(methods, arm, Zelig, dplyr, lme4)
+importFrom(arm,sim)
+import(Zelig, Formula, dplyr, lme4)
 
 exportPattern("^[[:alpha:]]+")
 exportClasses(
@@ -9,4 +10,3 @@ exportClasses(
 )
 
 importFrom(methods, setRefClass)
-importFrom("MASS", "mvrnorm")
